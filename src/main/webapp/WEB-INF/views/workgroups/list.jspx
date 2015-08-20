@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_stefanini_bob_management_domain_WorkGroup" items="${workgroups}" z="kg4rZnRHRyYs9YbQrb5FfldMasA=">
+        <table:table data="${workgroups}" id="l_com_stefanini_bob_management_domain_WorkGroup" path="/workgroups" z="DRrZ36c3kF7bJ2uhmW6EsJ+Gkrs=">
+            <table:column id="c_com_stefanini_bob_management_domain_WorkGroup_name" property="name" z="84AEX7bT5eEON9vYuQDgOiR5c1Q="/>
+        </table:table>
+    </page:list>
+</div>

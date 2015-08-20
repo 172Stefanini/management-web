@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_stefanini_bob_management_domain_TimeSheet" items="${timesheets}" z="/3AbNREZ4n1n0wkOcQV93Xt6SSo=">
+        <table:table data="${timesheets}" id="l_com_stefanini_bob_management_domain_TimeSheet" path="/timesheets" z="fRNa5H5wE+inTyoIAWg8f6CD1xA=">
+            <table:column id="c_com_stefanini_bob_management_domain_TimeSheet_category" property="category" z="YPw6OfelqJDSt/+MmQ/jZgBND7U="/>
+            <table:column id="c_com_stefanini_bob_management_domain_TimeSheet_team" property="team" z="PNJ7y2vuNlRxTYvn/KTw2dDRTr8="/>
+            <table:column id="c_com_stefanini_bob_management_domain_TimeSheet_workGroup" property="workGroup" z="hPLaGjTkhCvCnLiJSJ3fQNf1erA="/>
+            <table:column id="c_com_stefanini_bob_management_domain_TimeSheet_person" property="person" z="9ngy+KMKiINU5SAJvBGtXYEP8fM="/>
+            <table:column id="c_com_stefanini_bob_management_domain_TimeSheet_overtime" property="overtime" z="Tu/Nqhq6FnZf4FUyUnKyPjY8zoM="/>
+            <table:column date="true" dateTimePattern="${timeSheet_occurrencedate_date_format}" id="c_com_stefanini_bob_management_domain_TimeSheet_occurrenceDate" property="occurrenceDate" z="G1+cL3xpsY3uSyr40G8Bjl8h3sw="/>
+        </table:table>
+    </page:list>
+</div>
