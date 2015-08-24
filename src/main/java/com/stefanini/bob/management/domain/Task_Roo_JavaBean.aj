@@ -3,27 +3,9 @@
 
 package com.stefanini.bob.management.domain;
 
-import com.stefanini.bob.management.domain.Category;
 import com.stefanini.bob.management.domain.Task;
-import com.stefanini.bob.management.domain.TeamEnum;
 
 privileged aspect Task_Roo_JavaBean {
-    
-    public Category Task.getCategory() {
-        return this.category;
-    }
-    
-    public void Task.setCategory(Category category) {
-        this.category = category;
-    }
-    
-    public TeamEnum Task.getTeam() {
-        return this.team;
-    }
-    
-    public void Task.setTeam(TeamEnum team) {
-        this.team = team;
-    }
     
     public String Task.getDescription() {
         return this.description;
@@ -31,6 +13,14 @@ privileged aspect Task_Roo_JavaBean {
     
     public void Task.setDescription(String description) {
         this.description = description;
+    }
+    
+    public Boolean Task.getRework() {
+        return this.rework;
+    }
+    
+    public void Task.setRework(Boolean rework) {
+        this.rework = rework;
     }
     
 }

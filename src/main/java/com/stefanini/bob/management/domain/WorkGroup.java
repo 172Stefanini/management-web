@@ -7,6 +7,11 @@ import org.springframework.roo.addon.tostring.RooToString;
 @RooToString
 @RooJpaActiveRecord
 public class WorkGroup {
+	
+	public WorkGroup(){}
+	public WorkGroup(String name){
+		this.name = name;
+	}
 
     /**
      */

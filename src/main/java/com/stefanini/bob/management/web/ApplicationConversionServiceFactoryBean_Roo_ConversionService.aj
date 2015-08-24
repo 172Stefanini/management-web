@@ -5,11 +5,15 @@ package com.stefanini.bob.management.web;
 
 import com.stefanini.bob.management.domain.Category;
 import com.stefanini.bob.management.domain.Person;
+import com.stefanini.bob.management.domain.Project;
 import com.stefanini.bob.management.domain.Task;
+import com.stefanini.bob.management.domain.TaskAssociation;
 import com.stefanini.bob.management.domain.TimeSheet;
 import com.stefanini.bob.management.domain.WorkGroup;
 import com.stefanini.bob.management.services.CategoryService;
 import com.stefanini.bob.management.services.PersonService;
+import com.stefanini.bob.management.services.ProjectService;
+import com.stefanini.bob.management.services.TaskAssociationService;
 import com.stefanini.bob.management.services.TaskService;
 import com.stefanini.bob.management.services.TimeSheetService;
 import com.stefanini.bob.management.services.WorkGroupService;
@@ -30,7 +34,13 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     PersonService ApplicationConversionServiceFactoryBean.personService;
     
     @Autowired
+    ProjectService ApplicationConversionServiceFactoryBean.projectService;
+    
+    @Autowired
     TaskService ApplicationConversionServiceFactoryBean.taskService;
+    
+    @Autowired
+    TaskAssociationService ApplicationConversionServiceFactoryBean.taskAssociationService;
     
     @Autowired
     TimeSheetService ApplicationConversionServiceFactoryBean.timeSheetService;
@@ -86,6 +96,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<Project, String> ApplicationConversionServiceFactoryBean.getProjectToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.stefanini.bob.management.domain.Project, java.lang.String>() {
+            public String convert(Project project) {
+                return new StringBuilder().append(project.getName()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Project> ApplicationConversionServiceFactoryBean.getIdToProjectConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.stefanini.bob.management.domain.Project>() {
+            public com.stefanini.bob.management.domain.Project convert(java.lang.Long id) {
+                return projectService.findProject(id);
+            }
+        };
+    }
+    
+    public Converter<String, Project> ApplicationConversionServiceFactoryBean.getStringToProjectConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.stefanini.bob.management.domain.Project>() {
+            public com.stefanini.bob.management.domain.Project convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Project.class);
+            }
+        };
+    }
+    
     public Converter<Task, String> ApplicationConversionServiceFactoryBean.getTaskToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.stefanini.bob.management.domain.Task, java.lang.String>() {
             public String convert(Task task) {
@@ -110,10 +144,34 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
+    public Converter<TaskAssociation, String> ApplicationConversionServiceFactoryBean.getTaskAssociationToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.stefanini.bob.management.domain.TaskAssociation, java.lang.String>() {
+            public String convert(TaskAssociation taskAssociation) {
+                return "(no displayable fields)";
+            }
+        };
+    }
+    
+    public Converter<Long, TaskAssociation> ApplicationConversionServiceFactoryBean.getIdToTaskAssociationConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.stefanini.bob.management.domain.TaskAssociation>() {
+            public com.stefanini.bob.management.domain.TaskAssociation convert(java.lang.Long id) {
+                return taskAssociationService.findTaskAssociation(id);
+            }
+        };
+    }
+    
+    public Converter<String, TaskAssociation> ApplicationConversionServiceFactoryBean.getStringToTaskAssociationConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.stefanini.bob.management.domain.TaskAssociation>() {
+            public com.stefanini.bob.management.domain.TaskAssociation convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), TaskAssociation.class);
+            }
+        };
+    }
+    
     public Converter<TimeSheet, String> ApplicationConversionServiceFactoryBean.getTimeSheetToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.stefanini.bob.management.domain.TimeSheet, java.lang.String>() {
             public String convert(TimeSheet timeSheet) {
-                return new StringBuilder().append(timeSheet.getOccurrenceDate()).append(' ').append(timeSheet.getNote()).toString();
+                return new StringBuilder().append(timeSheet.getOccurrenceDate()).append(' ').append(timeSheet.getNote()).append(' ').append(timeSheet.getWorkHours()).toString();
             }
         };
     }
@@ -165,9 +223,15 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getPersonToStringConverter());
         registry.addConverter(getIdToPersonConverter());
         registry.addConverter(getStringToPersonConverter());
+        registry.addConverter(getProjectToStringConverter());
+        registry.addConverter(getIdToProjectConverter());
+        registry.addConverter(getStringToProjectConverter());
         registry.addConverter(getTaskToStringConverter());
         registry.addConverter(getIdToTaskConverter());
         registry.addConverter(getStringToTaskConverter());
+        registry.addConverter(getTaskAssociationToStringConverter());
+        registry.addConverter(getIdToTaskAssociationConverter());
+        registry.addConverter(getStringToTaskAssociationConverter());
         registry.addConverter(getTimeSheetToStringConverter());
         registry.addConverter(getIdToTimeSheetConverter());
         registry.addConverter(getStringToTimeSheetConverter());

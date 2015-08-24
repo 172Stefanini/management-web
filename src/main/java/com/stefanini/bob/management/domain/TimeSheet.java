@@ -9,6 +9,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.validation.constraints.Size;
+import java.math.BigDecimal;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 
 @RooJavaBean
 @RooToString
@@ -54,4 +57,10 @@ public class TimeSheet {
      */
     @Size(max = 4000)
     private String note;
+
+    /**
+     */
+    @DecimalMin("0")
+    @Digits(integer = 2, fraction = 1)
+    private BigDecimal workHours;
 }

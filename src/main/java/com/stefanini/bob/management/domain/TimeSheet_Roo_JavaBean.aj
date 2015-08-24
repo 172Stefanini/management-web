@@ -9,6 +9,7 @@ import com.stefanini.bob.management.domain.Task;
 import com.stefanini.bob.management.domain.TeamEnum;
 import com.stefanini.bob.management.domain.TimeSheet;
 import com.stefanini.bob.management.domain.WorkGroup;
+import java.math.BigDecimal;
 import java.util.Date;
 
 privileged aspect TimeSheet_Roo_JavaBean {
@@ -75,6 +76,14 @@ privileged aspect TimeSheet_Roo_JavaBean {
     
     public void TimeSheet.setNote(String note) {
         this.note = note;
+    }
+    
+    public BigDecimal TimeSheet.getWorkHours() {
+        return this.workHours;
+    }
+    
+    public void TimeSheet.setWorkHours(BigDecimal workHours) {
+        this.workHours = workHours;
     }
     
 }

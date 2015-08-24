@@ -9,6 +9,13 @@ import javax.validation.constraints.Size;
 @RooToString
 @RooJpaActiveRecord
 public class Person {
+	
+	public Person() {
+	}
+	
+	public Person(String name){
+		this.name = name;
+	}
 
     /**
      */

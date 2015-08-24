@@ -4,12 +4,9 @@
 package com.stefanini.bob.management.web;
 
 import com.stefanini.bob.management.domain.Task;
-import com.stefanini.bob.management.domain.TeamEnum;
-import com.stefanini.bob.management.services.CategoryService;
 import com.stefanini.bob.management.services.TaskService;
 import com.stefanini.bob.management.web.TaskController;
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +23,6 @@ privileged aspect TaskController_Roo_Controller {
     
     @Autowired
     TaskService TaskController.taskService;
-    
-    @Autowired
-    CategoryService TaskController.categoryService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String TaskController.create(@Valid Task task, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -97,8 +91,6 @@ privileged aspect TaskController_Roo_Controller {
     
     void TaskController.populateEditForm(Model uiModel, Task task) {
         uiModel.addAttribute("task", task);
-        uiModel.addAttribute("categorys", categoryService.findAllCategorys());
-        uiModel.addAttribute("teamenums", Arrays.asList(TeamEnum.values()));
     }
     
     String TaskController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

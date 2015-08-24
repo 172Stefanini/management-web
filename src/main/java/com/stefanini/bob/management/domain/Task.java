@@ -12,15 +12,9 @@ public class Task {
 
     /**
      */
-    @OneToOne
-    private Category category;
-
-    /**
-     */
-    @Enumerated
-    private TeamEnum team;
-
-    /**
-     */
     private String description;
+
+    /**
+     */
+    private Boolean rework;
 }

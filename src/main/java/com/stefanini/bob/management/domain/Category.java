@@ -8,6 +8,14 @@ import javax.validation.constraints.NotNull;
 @RooToString
 @RooJpaActiveRecord
 public class Category {
+	
+	public Category(){
+		
+	}
+	
+	public Category(String description){
+		this.description = description;
+	}
 
     /**
      */

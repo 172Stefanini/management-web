@@ -11,6 +11,7 @@
   <jsp:directive.attribute name="required" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicates if this field is required (default false)" />
   <jsp:directive.attribute name="disabled" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Specify if this field should be enabled" />
   <jsp:directive.attribute name="multiple" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Specify if the select box should allow multiple selections" />
+  <jsp:directive.attribute name="onChangeFunction" type="java.lang.String" required="false" rtexprvalue="true" description="String represents the functions that be called when change combo" />
   <jsp:directive.attribute name="disableFormBinding" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Set to true to disable Spring form binding" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
@@ -92,7 +93,7 @@
                     <c:when test="${empty itemLabel}">
                       <c:choose>
                         <c:when test="${multiple}">
-                          <form:select id="_${sec_field}_id" items="${items}" path="${sec_field}" disabled="${disabled}" multiple="${multiple}" />
+                          <form:select id="_${sec_field}_id" items="${items}" path="${sec_field}" disabled="${disabled}" multiple="${multiple}"/>
                         </c:when>
                         <c:otherwise>
                           <form:select id="_${sec_field}_id" items="${items}" path="${sec_field}" disabled="${disabled}" />
@@ -184,7 +185,12 @@
           </c:choose>
           <c:choose>
             <c:when test="${multiple == false}">
-              <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+	            <c:if test="${empty onChangeFunction}">
+	            	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true}})); </script>
+	            </c:if>
+	            <c:if test="${not empty onChangeFunction}">
+	            	<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${sec_field}_id', widgetType: 'dijit.form.FilteringSelect', widgetAttrs : {hasDownArrow : true, onChange: eval('${onChangeFunction}')}})); </script>
+	            </c:if>
             </c:when>
             <!-- disabled due to http://jira.springframework.org/browse/ROO-909 <c:otherwise> <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_${field}_id', widgetType: 'dijit.form.MultiSelect', widgetAttrs : {}})); </script> </c:otherwise> -->
           </c:choose>

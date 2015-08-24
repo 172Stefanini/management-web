@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_stefanini_bob_management_domain_TaskAssociation" modelAttribute="taskAssociation" path="/taskassociations" versionField="Version" z="eyesUWowFIyAlzrdlKPqpChEFdY=">
+        <field:select field="category" id="c_com_stefanini_bob_management_domain_TaskAssociation_category" itemValue="id" items="${categorys}" path="/categorys" z="RxJ8ujCuzUUuw+5rQOU4CMrQfVw="/>
+        <field:select field="team" id="c_com_stefanini_bob_management_domain_TaskAssociation_team" items="${teamenums}" path="teamenums" z="U617Mda/nneR9dCFwNdbfyzlNjI="/>
+        <field:select field="workGroup" id="c_com_stefanini_bob_management_domain_TaskAssociation_workGroup" itemValue="id" items="${workgroups}" path="/workgroups" z="S0yDb2qYozxxhGugml3m2nw0KpU="/>
+        <field:select field="person" id="c_com_stefanini_bob_management_domain_TaskAssociation_person" itemValue="id" items="${people}" path="/people" z="dd8bPbLpun/dtW8DQAivuANEBf0="/>
+        <field:select field="task" id="c_com_stefanini_bob_management_domain_TaskAssociation_task" itemValue="id" items="${tasks}" path="/tasks" z="uGawxXloukY+BKMJdpNqaQITBRg="/>
+    </form:update>
+</div>
