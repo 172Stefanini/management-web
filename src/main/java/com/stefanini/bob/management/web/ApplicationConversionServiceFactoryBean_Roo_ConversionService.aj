@@ -6,6 +6,7 @@ package com.stefanini.bob.management.web;
 import com.stefanini.bob.management.domain.Category;
 import com.stefanini.bob.management.domain.Person;
 import com.stefanini.bob.management.domain.PersonProjectRelationship;
+import com.stefanini.bob.management.domain.PersonWorkGroupRelationship;
 import com.stefanini.bob.management.domain.Project;
 import com.stefanini.bob.management.domain.Task;
 import com.stefanini.bob.management.domain.TimeSheet;
@@ -13,6 +14,7 @@ import com.stefanini.bob.management.domain.WorkGroup;
 import com.stefanini.bob.management.services.CategoryService;
 import com.stefanini.bob.management.services.PersonProjectRelationshipService;
 import com.stefanini.bob.management.services.PersonService;
+import com.stefanini.bob.management.services.PersonWorkGroupRelationshipService;
 import com.stefanini.bob.management.services.ProjectService;
 import com.stefanini.bob.management.services.TaskService;
 import com.stefanini.bob.management.services.TimeSheetService;
@@ -35,6 +37,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     PersonProjectRelationshipService ApplicationConversionServiceFactoryBean.personProjectRelationshipService;
+    
+    @Autowired
+    PersonWorkGroupRelationshipService ApplicationConversionServiceFactoryBean.personWorkGroupRelationshipService;
     
     @Autowired
     ProjectService ApplicationConversionServiceFactoryBean.projectService;
@@ -116,6 +121,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, com.stefanini.bob.management.domain.PersonProjectRelationship>() {
             public com.stefanini.bob.management.domain.PersonProjectRelationship convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), PersonProjectRelationship.class);
+            }
+        };
+    }
+    
+    public Converter<PersonWorkGroupRelationship, String> ApplicationConversionServiceFactoryBean.getPersonWorkGroupRelationshipToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.stefanini.bob.management.domain.PersonWorkGroupRelationship, java.lang.String>() {
+            public String convert(PersonWorkGroupRelationship personWorkGroupRelationship) {
+                return "(no displayable fields)";
+            }
+        };
+    }
+    
+    public Converter<Long, PersonWorkGroupRelationship> ApplicationConversionServiceFactoryBean.getIdToPersonWorkGroupRelationshipConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.stefanini.bob.management.domain.PersonWorkGroupRelationship>() {
+            public com.stefanini.bob.management.domain.PersonWorkGroupRelationship convert(java.lang.Long id) {
+                return personWorkGroupRelationshipService.findPersonWorkGroupRelationship(id);
+            }
+        };
+    }
+    
+    public Converter<String, PersonWorkGroupRelationship> ApplicationConversionServiceFactoryBean.getStringToPersonWorkGroupRelationshipConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.stefanini.bob.management.domain.PersonWorkGroupRelationship>() {
+            public com.stefanini.bob.management.domain.PersonWorkGroupRelationship convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), PersonWorkGroupRelationship.class);
             }
         };
     }
@@ -226,6 +255,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getPersonProjectRelationshipToStringConverter());
         registry.addConverter(getIdToPersonProjectRelationshipConverter());
         registry.addConverter(getStringToPersonProjectRelationshipConverter());
+        registry.addConverter(getPersonWorkGroupRelationshipToStringConverter());
+        registry.addConverter(getIdToPersonWorkGroupRelationshipConverter());
+        registry.addConverter(getStringToPersonWorkGroupRelationshipConverter());
         registry.addConverter(getProjectToStringConverter());
         registry.addConverter(getIdToProjectConverter());
         registry.addConverter(getStringToProjectConverter());

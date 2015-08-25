@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_stefanini_bob_management_domain_PersonWorkGroupRelationship" items="${personworkgrouprelationships}" z="YWdx1ofhq0rSye19onPk711Ydh4=">
+        <table:table data="${personworkgrouprelationships}" id="l_com_stefanini_bob_management_domain_PersonWorkGroupRelationship" path="/personworkgrouprelationships" z="jb29q6pO8pfOwf0ixbbpGy/+vOA=">
+            <table:column id="c_com_stefanini_bob_management_domain_PersonWorkGroupRelationship_person" property="person" z="v7dbLyE8CKfFqN17egmB8oL15WA="/>
+            <table:column id="c_com_stefanini_bob_management_domain_PersonWorkGroupRelationship_workGroup" property="workGroup" z="QMMCEwbnI49md4VvruLkbijj58I="/>
+        </table:table>
+    </page:list>
+</div>

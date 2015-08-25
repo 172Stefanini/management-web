@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="personworkgrouprelationships/list">
+        <put-attribute name="body" value="/WEB-INF/views/personworkgrouprelationships/list.jspx"/>
+    </definition>
+<definition extends="default" name="personworkgrouprelationships/show">
+        <put-attribute name="body" value="/WEB-INF/views/personworkgrouprelationships/show.jspx"/>
+    </definition>
+<definition extends="default" name="personworkgrouprelationships/create">
+        <put-attribute name="body" value="/WEB-INF/views/personworkgrouprelationships/create.jspx"/>
+    </definition>
+<definition extends="default" name="personworkgrouprelationships/update">
+        <put-attribute name="body" value="/WEB-INF/views/personworkgrouprelationships/update.jspx"/>
+    </definition>
+</tiles-definitions>

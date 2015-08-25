@@ -31,5 +31,9 @@
             <menu:item id="i_personprojectrelationship_new" messageCode="global_menu_new" url="/personprojectrelationships?form" z="Qmrxrb3sSN4oe00MIgaJtfmmO88="/>
             <menu:item id="i_personprojectrelationship_list" messageCode="global_menu_list" url="/personprojectrelationships?page=1&amp;size=${empty param.size ? 10 : param.size}" z="CsJ/1X+1exq5ocPn4Wfr2si7/N0="/>
         </menu:category>
+        <menu:category id="c_personworkgrouprelationship" z="hTefR6wp66dztoXaT0nmrF/G7mg=">
+            <menu:item id="i_personworkgrouprelationship_new" messageCode="global_menu_new" url="/personworkgrouprelationships?form" z="GBaw8dQTyzfzLoOHiE4EiAsGwW4="/>
+            <menu:item id="i_personworkgrouprelationship_list" messageCode="global_menu_list" url="/personworkgrouprelationships?page=1&amp;size=${empty param.size ? 10 : param.size}" z="rKmmgWiSvMDCVZv2MmC70MriW88="/>
+        </menu:category>
     </menu:menu>
 </div>
