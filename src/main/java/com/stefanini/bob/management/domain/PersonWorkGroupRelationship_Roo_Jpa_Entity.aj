@@ -3,7 +3,7 @@
 
 package com.stefanini.bob.management.domain;
 
-import com.stefanini.bob.management.domain.TaskAssociation;
+import com.stefanini.bob.management.domain.PersonWorkGroupRelationship;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,32 +11,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
-privileged aspect TaskAssociation_Roo_Jpa_Entity {
+privileged aspect PersonWorkGroupRelationship_Roo_Jpa_Entity {
     
-    declare @type: TaskAssociation: @Entity;
+    declare @type: PersonWorkGroupRelationship: @Entity;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long TaskAssociation.id;
+    private Long PersonWorkGroupRelationship.id;
     
     @Version
     @Column(name = "version")
-    private Integer TaskAssociation.version;
+    private Integer PersonWorkGroupRelationship.version;
     
-    public Long TaskAssociation.getId() {
+    public Long PersonWorkGroupRelationship.getId() {
         return this.id;
     }
     
-    public void TaskAssociation.setId(Long id) {
+    public void PersonWorkGroupRelationship.setId(Long id) {
         this.id = id;
     }
     
-    public Integer TaskAssociation.getVersion() {
+    public Integer PersonWorkGroupRelationship.getVersion() {
         return this.version;
     }
     
-    public void TaskAssociation.setVersion(Integer version) {
+    public void PersonWorkGroupRelationship.setVersion(Integer version) {
         this.version = version;
     }
     

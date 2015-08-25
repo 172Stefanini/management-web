@@ -6,6 +6,7 @@
         <table:table data="${tasks}" id="l_com_stefanini_bob_management_domain_Task" path="/tasks" z="ZtQYE5q/snvpd4om++oA0hdpTEc=">
             <table:column id="c_com_stefanini_bob_management_domain_Task_description" property="description" z="TDH4ZlSb8nb1bWg7jeSnSSe0fB4="/>
             <table:column id="c_com_stefanini_bob_management_domain_Task_rework" property="rework" z="yi9P00kmOfUeLOIq6WOIPd4VQrw="/>
+            <table:column id="c_com_stefanini_bob_management_domain_Task_category" property="category" z="wcHgDM3oNAAA9/tPMhPsvMOiTPs="/>
         </table:table>
     </page:list>
 </div>

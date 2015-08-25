@@ -14,7 +14,7 @@ privileged aspect TimeSheet_Roo_Jpa_ActiveRecord {
     @PersistenceContext
     transient EntityManager TimeSheet.entityManager;
     
-    public static final List<String> TimeSheet.fieldNames4OrderClauseFilter = java.util.Arrays.asList("category", "team", "workGroup", "person", "overtime", "occurrenceDate", "task", "note", "workHours");
+    public static final List<String> TimeSheet.fieldNames4OrderClauseFilter = java.util.Arrays.asList("category", "workGroup", "person", "overtime", "occurrenceDate", "task", "note", "workHours", "project");
     
     public static final EntityManager TimeSheet.entityManager() {
         EntityManager em = new TimeSheet().entityManager;

@@ -4,6 +4,7 @@
 package com.stefanini.bob.management.domain;
 
 import com.stefanini.bob.management.domain.Category;
+import com.stefanini.bob.management.domain.Project;
 
 privileged aspect Category_Roo_JavaBean {
     
@@ -13,6 +14,14 @@ privileged aspect Category_Roo_JavaBean {
     
     public void Category.setDescription(String description) {
         this.description = description;
+    }
+    
+    public Project Category.getProject() {
+        return this.project;
+    }
+    
+    public void Category.setProject(Project project) {
+        this.project = project;
     }
     
 }

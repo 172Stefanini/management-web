@@ -5,5 +5,6 @@
     <page:show id="ps_com_stefanini_bob_management_domain_Task" object="${task}" path="/tasks" z="UyMpyglpOObhVHXcRMnUktWvmB4=">
         <field:display field="description" id="s_com_stefanini_bob_management_domain_Task_description" object="${task}" z="xboCKPqC0a+/zYZvAlXyq8v/ErA="/>
         <field:display field="rework" id="s_com_stefanini_bob_management_domain_Task_rework" object="${task}" z="mCYE9BCiYr6ZWX2C4kg3rbF9B8w="/>
+        <field:display field="category" id="s_com_stefanini_bob_management_domain_Task_category" object="${task}" z="sgAxw/iUe2514TJBCgJuMyMUEfg="/>
     </page:show>
 </div>

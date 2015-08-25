@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
+import javax.persistence.ManyToOne;
 
 @RooJavaBean
 @RooToString
@@ -22,11 +23,6 @@ public class TimeSheet {
      */
     @OneToOne
     private Category category;
-
-    /**
-     */
-    @Enumerated
-    private TeamEnum team;
 
     /**
      */
@@ -63,4 +59,9 @@ public class TimeSheet {
     @DecimalMin("0")
     @Digits(integer = 2, fraction = 1)
     private BigDecimal workHours;
+
+    /**
+     */
+    @ManyToOne
+    private Project project;
 }

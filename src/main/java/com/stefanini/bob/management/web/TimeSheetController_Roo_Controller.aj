@@ -3,16 +3,15 @@
 
 package com.stefanini.bob.management.web;
 
-import com.stefanini.bob.management.domain.TeamEnum;
 import com.stefanini.bob.management.domain.TimeSheet;
 import com.stefanini.bob.management.services.CategoryService;
 import com.stefanini.bob.management.services.PersonService;
+import com.stefanini.bob.management.services.ProjectService;
 import com.stefanini.bob.management.services.TaskService;
 import com.stefanini.bob.management.services.TimeSheetService;
 import com.stefanini.bob.management.services.WorkGroupService;
 import com.stefanini.bob.management.web.TimeSheetController;
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
@@ -37,6 +36,9 @@ privileged aspect TimeSheetController_Roo_Controller {
     
     @Autowired
     PersonService TimeSheetController.personService;
+    
+    @Autowired
+    ProjectService TimeSheetController.projectService;
     
     @Autowired
     TaskService TimeSheetController.taskService;
@@ -120,8 +122,8 @@ privileged aspect TimeSheetController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("categorys", categoryService.findAllCategorys());
         uiModel.addAttribute("people", personService.findAllPeople());
+        uiModel.addAttribute("projects", projectService.findAllProjects());
         uiModel.addAttribute("tasks", taskService.findAllTasks());
-        uiModel.addAttribute("teamenums", Arrays.asList(TeamEnum.values()));
         uiModel.addAttribute("workgroups", workGroupService.findAllWorkGroups());
     }
     

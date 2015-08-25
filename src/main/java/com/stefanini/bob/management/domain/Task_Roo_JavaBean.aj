@@ -3,6 +3,7 @@
 
 package com.stefanini.bob.management.domain;
 
+import com.stefanini.bob.management.domain.Category;
 import com.stefanini.bob.management.domain.Task;
 
 privileged aspect Task_Roo_JavaBean {
@@ -21,6 +22,14 @@ privileged aspect Task_Roo_JavaBean {
     
     public void Task.setRework(Boolean rework) {
         this.rework = rework;
+    }
+    
+    public Category Task.getCategory() {
+        return this.category;
+    }
+    
+    public void Task.setCategory(Category category) {
+        this.category = category;
     }
     
 }

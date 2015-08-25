@@ -5,8 +5,8 @@ package com.stefanini.bob.management.domain;
 
 import com.stefanini.bob.management.domain.Category;
 import com.stefanini.bob.management.domain.Person;
+import com.stefanini.bob.management.domain.Project;
 import com.stefanini.bob.management.domain.Task;
-import com.stefanini.bob.management.domain.TeamEnum;
 import com.stefanini.bob.management.domain.TimeSheet;
 import com.stefanini.bob.management.domain.WorkGroup;
 import java.math.BigDecimal;
@@ -20,14 +20,6 @@ privileged aspect TimeSheet_Roo_JavaBean {
     
     public void TimeSheet.setCategory(Category category) {
         this.category = category;
-    }
-    
-    public TeamEnum TimeSheet.getTeam() {
-        return this.team;
-    }
-    
-    public void TimeSheet.setTeam(TeamEnum team) {
-        this.team = team;
     }
     
     public WorkGroup TimeSheet.getWorkGroup() {
@@ -84,6 +76,14 @@ privileged aspect TimeSheet_Roo_JavaBean {
     
     public void TimeSheet.setWorkHours(BigDecimal workHours) {
         this.workHours = workHours;
+    }
+    
+    public Project TimeSheet.getProject() {
+        return this.project;
+    }
+    
+    public void TimeSheet.setProject(Project project) {
+        this.project = project;
     }
     
 }

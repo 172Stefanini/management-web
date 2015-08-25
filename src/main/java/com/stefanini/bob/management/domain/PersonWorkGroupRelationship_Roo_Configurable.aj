@@ -3,11 +3,11 @@
 
 package com.stefanini.bob.management.domain;
 
-import com.stefanini.bob.management.domain.TaskAssociation;
+import com.stefanini.bob.management.domain.PersonWorkGroupRelationship;
 import org.springframework.beans.factory.annotation.Configurable;
 
-privileged aspect TaskAssociation_Roo_Configurable {
+privileged aspect PersonWorkGroupRelationship_Roo_Configurable {
     
-    declare @type: TaskAssociation: @Configurable;
+    declare @type: PersonWorkGroupRelationship: @Configurable;
     
 }

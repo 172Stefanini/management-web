@@ -4,5 +4,6 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_com_stefanini_bob_management_domain_Category" modelAttribute="category" path="/categorys" versionField="Version" z="8U8gLo2QOuqY5LiTSrzxY+dYiO4=">
         <field:input field="description" id="c_com_stefanini_bob_management_domain_Category_description" required="true" z="oy2hd9srmFLEjXu8BeRt7Gri2cU="/>
+        <field:select field="project" id="c_com_stefanini_bob_management_domain_Category_project" itemValue="id" items="${projects}" path="/projects" z="bnuZBcd6RNTXA7WcUR0sBTjNc74="/>
     </form:update>
 </div>

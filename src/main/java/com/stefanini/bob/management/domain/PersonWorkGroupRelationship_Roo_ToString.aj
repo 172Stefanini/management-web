@@ -3,13 +3,13 @@
 
 package com.stefanini.bob.management.domain;
 
-import com.stefanini.bob.management.domain.TaskAssociation;
+import com.stefanini.bob.management.domain.PersonWorkGroupRelationship;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-privileged aspect TaskAssociation_Roo_ToString {
+privileged aspect PersonWorkGroupRelationship_Roo_ToString {
     
-    public String TaskAssociation.toString() {
+    public String PersonWorkGroupRelationship.toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
     

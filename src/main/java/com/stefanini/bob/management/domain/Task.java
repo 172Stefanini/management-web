@@ -4,6 +4,7 @@ import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 import javax.persistence.OneToOne;
 import javax.persistence.Enumerated;
+import javax.persistence.ManyToOne;
 
 @RooJavaBean
 @RooToString
@@ -17,4 +18,9 @@ public class Task {
     /**
      */
     private Boolean rework;
+
+    /**
+     */
+    @ManyToOne
+    private Category category;
 }

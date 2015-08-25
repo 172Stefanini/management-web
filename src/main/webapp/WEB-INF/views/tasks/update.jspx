@@ -5,5 +5,6 @@
     <form:update id="fu_com_stefanini_bob_management_domain_Task" modelAttribute="task" path="/tasks" versionField="Version" z="7wW2yEfk7FiHwf8l/H5T+Gc5a7o=">
         <field:input field="description" id="c_com_stefanini_bob_management_domain_Task_description" z="ZpziwtAZLQc5AfiFTgnYgpS4Poc="/>
         <field:checkbox field="rework" id="c_com_stefanini_bob_management_domain_Task_rework" z="5X6Y90xNMiILQlqdorUaQSOsM/E="/>
+        <field:select field="category" id="c_com_stefanini_bob_management_domain_Task_category" itemValue="id" items="${categorys}" path="/categorys" z="cXK77A2N8+Hb0TZ0msPoqcTdXBo="/>
     </form:update>
 </div>

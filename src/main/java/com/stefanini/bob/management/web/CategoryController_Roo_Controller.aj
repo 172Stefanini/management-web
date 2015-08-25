@@ -5,6 +5,7 @@ package com.stefanini.bob.management.web;
 
 import com.stefanini.bob.management.domain.Category;
 import com.stefanini.bob.management.services.CategoryService;
+import com.stefanini.bob.management.services.ProjectService;
 import com.stefanini.bob.management.web.CategoryController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,9 @@ privileged aspect CategoryController_Roo_Controller {
     
     @Autowired
     CategoryService CategoryController.categoryService;
+    
+    @Autowired
+    ProjectService CategoryController.projectService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String CategoryController.create(@Valid Category category, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -91,6 +95,7 @@ privileged aspect CategoryController_Roo_Controller {
     
     void CategoryController.populateEditForm(Model uiModel, Category category) {
         uiModel.addAttribute("category", category);
+        uiModel.addAttribute("projects", projectService.findAllProjects());
     }
     
     String CategoryController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

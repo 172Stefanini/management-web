@@ -4,7 +4,6 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_com_stefanini_bob_management_domain_TimeSheet" object="${timesheet}" path="/timesheets" z="yWnlfenyEQmIegwUl6Ek1Nb4lew=">
         <field:display field="category" id="s_com_stefanini_bob_management_domain_TimeSheet_category" object="${timesheet}" z="BVeYhcuh3uT06utlo/dnGXqJCls="/>
-        <field:display field="team" id="s_com_stefanini_bob_management_domain_TimeSheet_team" object="${timesheet}" z="Q0xTRGlrDgVDPPWlxPXPdRSDamo="/>
         <field:display field="workGroup" id="s_com_stefanini_bob_management_domain_TimeSheet_workGroup" object="${timesheet}" z="LfdnubCGHoGieoPRbdc4plMQpmo="/>
         <field:display field="person" id="s_com_stefanini_bob_management_domain_TimeSheet_person" object="${timesheet}" z="omMtaXd+WEL/TI37CgSA9keUgVo="/>
         <field:display field="overtime" id="s_com_stefanini_bob_management_domain_TimeSheet_overtime" object="${timesheet}" z="HGDKYdHsovtPLjU2WcjMmgiQOCQ="/>
@@ -12,5 +11,6 @@
         <field:display field="task" id="s_com_stefanini_bob_management_domain_TimeSheet_task" object="${timesheet}" z="ejBBRUYRMLhz+FGt60DSKuEW0K8="/>
         <field:display field="note" id="s_com_stefanini_bob_management_domain_TimeSheet_note" object="${timesheet}" z="wwZ7gjyOADxd9eTc1459iX4vy8Q="/>
         <field:display field="workHours" id="s_com_stefanini_bob_management_domain_TimeSheet_workHours" object="${timesheet}" z="zSBM8Ka+WoXTcSrEk25temqe7sg="/>
+        <field:display field="project" id="s_com_stefanini_bob_management_domain_TimeSheet_project" object="${timesheet}" z="1Djl3bjbXu1NOAbY0iKZPWzVhQs="/>
     </page:show>
 </div>
