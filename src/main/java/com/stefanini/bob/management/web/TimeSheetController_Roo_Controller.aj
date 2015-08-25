@@ -4,12 +4,7 @@
 package com.stefanini.bob.management.web;
 
 import com.stefanini.bob.management.domain.TimeSheet;
-import com.stefanini.bob.management.services.CategoryService;
-import com.stefanini.bob.management.services.PersonService;
-import com.stefanini.bob.management.services.ProjectService;
-import com.stefanini.bob.management.services.TaskService;
 import com.stefanini.bob.management.services.TimeSheetService;
-import com.stefanini.bob.management.services.WorkGroupService;
 import com.stefanini.bob.management.web.TimeSheetController;
 import java.io.UnsupportedEncodingException;
 import javax.servlet.http.HttpServletRequest;
@@ -30,21 +25,6 @@ privileged aspect TimeSheetController_Roo_Controller {
     
     @Autowired
     TimeSheetService TimeSheetController.timeSheetService;
-    
-    @Autowired
-    CategoryService TimeSheetController.categoryService;
-    
-    @Autowired
-    PersonService TimeSheetController.personService;
-    
-    @Autowired
-    ProjectService TimeSheetController.projectService;
-    
-    @Autowired
-    TaskService TimeSheetController.taskService;
-    
-    @Autowired
-    WorkGroupService TimeSheetController.workGroupService;
     
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
     public String TimeSheetController.create(@Valid TimeSheet timeSheet, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
@@ -115,16 +95,6 @@ privileged aspect TimeSheetController_Roo_Controller {
     
     void TimeSheetController.addDateTimeFormatPatterns(Model uiModel) {
         uiModel.addAttribute("timeSheet_occurrencedate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-    }
-    
-    void TimeSheetController.populateEditForm(Model uiModel, TimeSheet timeSheet) {
-        uiModel.addAttribute("timeSheet", timeSheet);
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("categorys", categoryService.findAllCategorys());
-        uiModel.addAttribute("people", personService.findAllPeople());
-        uiModel.addAttribute("projects", projectService.findAllProjects());
-        uiModel.addAttribute("tasks", taskService.findAllTasks());
-        uiModel.addAttribute("workgroups", workGroupService.findAllWorkGroups());
     }
     
     String TimeSheetController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

@@ -75,7 +75,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<Person, String> ApplicationConversionServiceFactoryBean.getPersonToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.stefanini.bob.management.domain.Person, java.lang.String>() {
             public String convert(Person person) {
-                return new StringBuilder().append(person.getName()).toString();
+                return new StringBuilder().append(person.getName()).append(' ').append(person.getAccessUserName()).toString();
             }
         };
     }

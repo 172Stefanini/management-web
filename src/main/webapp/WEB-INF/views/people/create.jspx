@@ -4,6 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_com_stefanini_bob_management_domain_Person" modelAttribute="person" path="/people" render="${empty dependencies}" z="1r9E302FCKcTjqyolFuc2P6MtvE=">
         <field:textarea field="name" id="c_com_stefanini_bob_management_domain_Person_name" required="true" z="pPTCd8OwG1Ii1AQfrlxgrfHCyqE="/>
+        <field:input field="accessUserName" id="c_com_stefanini_bob_management_domain_Person_accessUserName" z="AjS8Qr5BgLly9R/GwH8FFF0lvYg="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_stefanini_bob_management_domain_Person" render="${not empty dependencies}" z="2PgjvYmpZxccdcZte3gYbwYkSM0="/>
 </div>

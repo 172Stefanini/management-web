@@ -4,5 +4,6 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_com_stefanini_bob_management_domain_Person" modelAttribute="person" path="/people" versionField="Version" z="hiR8ML+dJS+TTf0oD9rI1ZKR2p4=">
         <field:textarea field="name" id="c_com_stefanini_bob_management_domain_Person_name" required="true" z="pPTCd8OwG1Ii1AQfrlxgrfHCyqE="/>
+        <field:input field="accessUserName" id="c_com_stefanini_bob_management_domain_Person_accessUserName" z="AjS8Qr5BgLly9R/GwH8FFF0lvYg="/>
     </form:update>
 </div>

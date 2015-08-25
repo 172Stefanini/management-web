@@ -15,4 +15,12 @@ privileged aspect Person_Roo_JavaBean {
         this.name = name;
     }
     
+    public String Person.getAccessUserName() {
+        return this.accessUserName;
+    }
+    
+    public void Person.setAccessUserName(String accessUserName) {
+        this.accessUserName = accessUserName;
+    }
+    
 }
