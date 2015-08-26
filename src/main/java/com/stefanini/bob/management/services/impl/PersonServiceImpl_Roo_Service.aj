@@ -3,11 +3,9 @@
 
 package com.stefanini.bob.management.services.impl;
 
-import com.stefanini.bob.management.dao.PersonDAO;
 import com.stefanini.bob.management.domain.Person;
 import com.stefanini.bob.management.services.impl.PersonServiceImpl;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,9 +14,6 @@ privileged aspect PersonServiceImpl_Roo_Service {
     declare @type: PersonServiceImpl: @Service;
     
     declare @type: PersonServiceImpl: @Transactional;
-    
-    @Autowired
-    PersonDAO PersonServiceImpl.personDAO;
     
     public long PersonServiceImpl.countAllPeople() {
         return personDAO.count();

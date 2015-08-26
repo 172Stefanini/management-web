@@ -4,4 +4,6 @@ import org.springframework.roo.addon.layers.repository.jpa.RooJpaRepository;
 
 @RooJpaRepository(domainType = Person.class)
 public interface PersonDAO {
+	
+	public Person findByAccessUserName(String accessUserName);
 }
