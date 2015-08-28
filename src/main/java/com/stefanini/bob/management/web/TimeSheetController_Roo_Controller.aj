@@ -37,12 +37,6 @@ privileged aspect TimeSheetController_Roo_Controller {
         return "redirect:/timesheets/" + encodeUrlPathSegment(timeSheet.getId().toString(), httpServletRequest);
     }
     
-    @RequestMapping(params = "form", produces = "text/html")
-    public String TimeSheetController.createForm(Model uiModel) {
-        populateEditForm(uiModel, new TimeSheet());
-        return "timesheets/create";
-    }
-    
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String TimeSheetController.show(@PathVariable("id") Long id, Model uiModel) {
         addDateTimeFormatPatterns(uiModel);

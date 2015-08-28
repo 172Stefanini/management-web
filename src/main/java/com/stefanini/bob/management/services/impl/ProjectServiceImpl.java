@@ -27,10 +27,8 @@ public class ProjectServiceImpl implements ProjectService {
 		Root<PersonProjectRelationship> root = criteriaProject.from(PersonProjectRelationship.class);
 		criteriaProject.select(root);
 		
-		Join<PersonProjectRelationship, Project> joinProjectRel = root.join("project");
 		Join<PersonProjectRelationship, Person> joinRelPerson = root.join("person");
 		
-		criteriaProject.select(root);
 		criteriaProject.where(builder.equal(joinRelPerson.get("id"), person.getId()));
 		
 		List<PersonProjectRelationship> listRel = entityManager.createQuery(criteriaProject).getResultList();

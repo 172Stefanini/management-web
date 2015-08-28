@@ -16,6 +16,15 @@
 	</head>
 	
   	<body class="tundra spring">
+  		<div id="loadingDiv" class="bubblingG">
+			<span id="bubblingG_1">
+			</span>
+			<span id="bubblingG_2">
+			</span>
+			<span id="bubblingG_3">
+			</span>
+		</div>
+  	
    		<div id="wrapper">
 		    <tiles:insertAttribute name="header" ignore="true" />
 		    <tiles:insertAttribute name="menu" ignore="true" />   
