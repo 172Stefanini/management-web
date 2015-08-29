@@ -9,6 +9,7 @@
   <jsp:directive.attribute name="create" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'create' link into table (default true)" />
   <jsp:directive.attribute name="update" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'update' link into table (default true)" />
   <jsp:directive.attribute name="delete" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'delete' link into table (default true)" />
+  <jsp:directive.attribute name="excelExport" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Include 'excel export' link into table (default true)" />
   <jsp:directive.attribute name="render" type="java.lang.Boolean" required="false" rtexprvalue="true" description="Indicate if the contents of this tag and all enclosed tags should be rendered (default 'true')" />
   <jsp:directive.attribute name="z" type="java.lang.String" required="false" description="Used for checking if element has been modified (to recalculate simply provide empty string value)" />
 
@@ -186,6 +187,19 @@
                 <spring:url value="/resources/images/add.png" var="create_img_url" />
                 <spring:message arguments="${typeName}" code="global_menu_new" var="add_message" htmlEscape="false" />
                 <img alt="${fn:escapeXml(add_message)}" src="${create_img_url}" title="${fn:escapeXml(add_message)}" />
+              </a>
+            </span>
+            <c:out value=" " />
+          </c:if>
+          <c:if test="${not empty excelExport and excelExport}">
+            <span class="new">
+              <spring:url value="${path}" var="excel_url">
+                <spring:param name="excel" />
+              </spring:url>
+              <a href="${excel_url}">
+                <spring:url value="/resources/images/icon-excel2013.png" var="excel_img_url" />
+                <spring:message arguments="${typeName}" code="global_menu_new" var="excel_message" htmlEscape="false" />
+                <img alt="${fn:escapeXml(excel_message)}" src="${excel_img_url}" title="${fn:escapeXml(excel_message)}" />
               </a>
             </span>
             <c:out value=" " />

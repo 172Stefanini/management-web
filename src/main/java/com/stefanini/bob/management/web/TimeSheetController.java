@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
@@ -12,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.stefanini.bob.management.domain.Category;
 import com.stefanini.bob.management.domain.Person;
 import com.stefanini.bob.management.domain.Project;
@@ -23,6 +26,7 @@ import com.stefanini.bob.management.services.PersonService;
 import com.stefanini.bob.management.services.ProjectService;
 import com.stefanini.bob.management.services.TaskService;
 import com.stefanini.bob.management.services.WorkGroupService;
+
 import flexjson.JSONSerializer;
 
 @RequestMapping("/timesheets")
@@ -48,24 +52,14 @@ public class TimeSheetController {
 	private SecurityContextUtils securityContextUtils;
 
     void populateEditForm(Model uiModel, TimeSheet timeSheet) {
-    	securityContextUtils = new SecurityContextUtils();
     	
-    	List<Person> listPeopleToShow = new ArrayList<Person>(); 
+    	List<Person> listPeopleToShow = getListOfPeopleByPermission();
+
     	List<Project> listProjectsToShow = new ArrayList<Project>();
     	List<Category> listCategoriesToShow = new ArrayList<Category>();
     	List<Task> listTasksToShow = new ArrayList<Task>();
     	List<WorkGroup> listWorkGroupToShow = new ArrayList<WorkGroup>();
     	
-    	Person loggedPerson = personService.getPersonByAccessUserName(securityContextUtils.getLoggedUserName());
-    	
-    	if(securityContextUtils.hasRole("ROLE_ADMIN")){
-    		listPeopleToShow.addAll(personService.findAllPeople());
-    	}else if(securityContextUtils.hasRole("ROLE_MANAGER")){
-    		listPeopleToShow.addAll(personService.findByManager(loggedPerson));
-    	}else{
-        	listPeopleToShow.add(loggedPerson);
-    	}
-
 		if(!listPeopleToShow.isEmpty())
 			listProjectsToShow.addAll(projectService.findByPerson(listPeopleToShow.get(0)));
 		
@@ -146,21 +140,9 @@ public class TimeSheetController {
         return new JSONSerializer().serialize(tasks);
     }
 
-
 	@RequestMapping(produces = "text/html")
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
-		List<Person> listPeopleToFilter = new ArrayList<Person>();
-		securityContextUtils = new SecurityContextUtils();
-    	Person loggedPerson = personService.getPersonByAccessUserName(securityContextUtils.getLoggedUserName());
-
-    	
-		if(securityContextUtils.hasRole("ROLE_ADMIN")){
-    		listPeopleToFilter.addAll(personService.findAllPeople());
-    	}else if(securityContextUtils.hasRole("ROLE_MANAGER")){
-    		listPeopleToFilter.addAll(personService.findByManager(loggedPerson));
-    	}else{
-        	listPeopleToFilter.add(loggedPerson);
-    	}
+		List<Person> listPeopleToFilter = getListOfPeopleByPermission();
 		
 		if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
@@ -174,4 +156,30 @@ public class TimeSheetController {
         addDateTimeFormatPatterns(uiModel);
         return "timesheets/list";
     }
+	
+	@RequestMapping(params = "excel")
+    public ModelAndView excelExport(Model uiModel) {
+		
+		List<Person> listPeopleToFilter = getListOfPeopleByPermission();
+		
+		return new ModelAndView("TimesheetDailyExcelView", "timesheetList", TimeSheet.findAllTimeSheets("", "", listPeopleToFilter));
+
+    }
+	
+	private List<Person> getListOfPeopleByPermission(){
+		List<Person> listPeopleToFilter = new ArrayList<Person>();
+		securityContextUtils = new SecurityContextUtils();
+    	Person loggedPerson = personService.getPersonByAccessUserName(securityContextUtils.getLoggedUserName());
+
+    	
+		if(securityContextUtils.hasRole("ROLE_ADMIN")){
+    		listPeopleToFilter.addAll(personService.findAllPeople());
+    	}else if(securityContextUtils.hasRole("ROLE_MANAGER")){
+    		listPeopleToFilter.addAll(personService.findByManager(loggedPerson));
+    	}else{
+        	listPeopleToFilter.add(loggedPerson);
+    	}
+		
+		return listPeopleToFilter;
+	}
 }

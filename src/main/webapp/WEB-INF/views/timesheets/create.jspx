@@ -13,7 +13,7 @@
         <field:select field="workGroup" id="c_com_stefanini_bob_management_domain_TimeSheet_workGroup" itemValue="id" items="${workgroups}" path="/workgroups" z="7Wav8W/Yk0OyYU4JZymU/DM7Jxk=" required="false"/>
         <field:select field="project" id="c_com_stefanini_bob_management_domain_TimeSheet_project" itemValue="id" items="${projects}" path="/projects" z="user-managed" onChangeFunction="changeProject"/>
         <field:select field="category" id="c_com_stefanini_bob_management_domain_TimeSheet_category" itemValue="id" items="${categorys}" path="/categorys" z="user-managed" onChangeFunction="changeCategory"/>
-        <field:select field="task" id="c_com_stefanini_bob_management_domain_TimeSheet_task" itemValue="id" items="${tasks}" path="/tasks" z="OiSts2vlVLViY3OT7sXcAZiS3+Y="/>
+        <field:select field="task" id="c_com_stefanini_bob_management_domain_TimeSheet_task" itemValue="id" items="${tasks}" path="/tasks" z="OiSts2vlVLViY3OT7sXcAZiS3+Y=" required="true"/>
 		<field:input decimalMin="0" field="workHours" id="c_com_stefanini_bob_management_domain_TimeSheet_workHours" required="true" validationMessageCode="field_invalid_number" z="M96cY+mSa0H+QG6FkBbdWJeJCv0="/>
         <field:checkbox field="overtime" id="c_com_stefanini_bob_management_domain_TimeSheet_overtime" z="Dg/ASoLddmYJkKsbSEMkQlVOuB4="/>
         <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
