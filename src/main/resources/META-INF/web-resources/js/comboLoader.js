@@ -36,6 +36,17 @@ function changePerson(){
 			}
 		});
 	}
+
+	if(dijit.byId('_workGroup_id')){
+		$.ajax({
+			  url: "/management/timesheets?updateWorkGroupCombo&personId=" + dijit.byId('_person_id').get('value')
+		}).done(function( data ) {
+			
+			clearCombo(dijit.byId("_workGroup_id"));
+			
+			addDataToComboNameProperty(dijit.byId('_workGroup_id'), data);
+		});
+	}
 }
 
 function changeProject(){
