@@ -3,11 +3,12 @@
 
 package com.stefanini.bob.management.domain;
 
-import java.util.Collection;
-import java.util.List;
-
+import com.stefanini.bob.management.domain.Category;
 import flexjson.JSONDeserializer;
 import flexjson.JSONSerializer;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 privileged aspect Category_Roo_Json {
     

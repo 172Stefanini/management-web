@@ -30,7 +30,17 @@ privileged aspect TimeSheet_Roo_Jpa_ActiveRecord {
         return entityManager().createQuery("SELECT o FROM TimeSheet o", TimeSheet.class).getResultList();
     }
     
-        
+    public static List<TimeSheet> TimeSheet.findAllTimeSheets(String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM TimeSheet o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, TimeSheet.class).getResultList();
+    }
+    
     public static TimeSheet TimeSheet.findTimeSheet(Long id) {
         if (id == null) return null;
         return entityManager().find(TimeSheet.class, id);
@@ -40,7 +50,17 @@ privileged aspect TimeSheet_Roo_Jpa_ActiveRecord {
         return entityManager().createQuery("SELECT o FROM TimeSheet o", TimeSheet.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
-        
+    public static List<TimeSheet> TimeSheet.findTimeSheetEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM TimeSheet o";
+        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
+            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
+            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
+                jpaQuery = jpaQuery + " " + sortOrder;
+            }
+        }
+        return entityManager().createQuery(jpaQuery, TimeSheet.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    }
+    
     @Transactional
     public void TimeSheet.persist() {
         if (this.entityManager == null) this.entityManager = entityManager();

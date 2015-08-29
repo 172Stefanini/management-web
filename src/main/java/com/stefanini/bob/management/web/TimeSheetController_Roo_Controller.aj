@@ -45,7 +45,6 @@ privileged aspect TimeSheetController_Roo_Controller {
         return "timesheets/show";
     }
     
-        
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String TimeSheetController.update(@Valid TimeSheet timeSheet, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
