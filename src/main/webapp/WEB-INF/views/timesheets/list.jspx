@@ -4,12 +4,16 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_com_stefanini_bob_management_domain_TimeSheet" items="${timesheets}" z="/3AbNREZ4n1n0wkOcQV93Xt6SSo=">
         <table:table data="${timesheets}" excelExport="true" id="l_com_stefanini_bob_management_domain_TimeSheet" path="/timesheets" z="user-managed">
+        	<table:column id="c_com_stefanini_bob_management_domain_TimeSheet_project" property="project.name" z="hPLaGjTkhCvCnLiJSJ3fQNf1erA="/>
+        	<table:column id="c_com_stefanini_bob_management_domain_TimeSheet_person" property="person.name" z="9ngy+KMKiINU5SAJvBGtXYEP8fM="/>
+        	<table:column id="c_com_stefanini_bob_management_domain_TimeSheet_workGroup" property="workGroup" z="hPLaGjTkhCvCnLiJSJ3fQNf1erA="/>
             <table:column id="c_com_stefanini_bob_management_domain_TimeSheet_category" property="category" z="YPw6OfelqJDSt/+MmQ/jZgBND7U="/>
-            <table:column id="c_com_stefanini_bob_management_domain_TimeSheet_workGroup" property="workGroup" z="hPLaGjTkhCvCnLiJSJ3fQNf1erA="/>
-            <table:column id="c_com_stefanini_bob_management_domain_TimeSheet_person" property="person" z="9ngy+KMKiINU5SAJvBGtXYEP8fM="/>
-            <table:column id="c_com_stefanini_bob_management_domain_TimeSheet_overtime" property="overtime" z="Tu/Nqhq6FnZf4FUyUnKyPjY8zoM="/>
-            <table:column date="true" dateTimePattern="${timeSheet_occurrencedate_date_format}" id="c_com_stefanini_bob_management_domain_TimeSheet_occurrenceDate" property="occurrenceDate" z="G1+cL3xpsY3uSyr40G8Bjl8h3sw="/>
             <table:column id="c_com_stefanini_bob_management_domain_TimeSheet_task" property="task" z="clSzU8LEEs/U9rIiTFxfHaaaHas="/>
+            <table:column id="c_com_stefanini_bob_management_domain_TimeSheet_overtime" property="stringfyOvertime" z="Tu/Nqhq6FnZf4FUyUnKyPjY8zoM="/>
+            <table:column id="c_com_stefanini_bob_management_domain_TimeSheet_workHours" property="workHours" z="Tu/Nqhq6FnZf4FUyUnKyPjY8zoM="/>
+            <table:column date="true" dateTimePattern="${timeSheet_occurrencedate_date_format}" id="c_com_stefanini_bob_management_domain_TimeSheet_occurrenceDate" property="occurrenceDate" z="G1+cL3xpsY3uSyr40G8Bjl8h3sw="/>
+            
         </table:table>
     </page:list>
+    
 </div>

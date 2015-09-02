@@ -1,7 +1,6 @@
 /**
  * At this file we put all functions used for reload the applications combobox
  * */
-
 function changePerson(){
 	
 	if(dijit.byId('_project_id')){

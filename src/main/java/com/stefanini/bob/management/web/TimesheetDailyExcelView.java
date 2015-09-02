@@ -38,12 +38,13 @@ public class TimesheetDailyExcelView extends AbstractExcelView {
 		excelHeader.createCell(1).setCellValue("Projeto");
 		excelHeader.createCell(2).setCellValue("Categoria");
 		excelHeader.createCell(3).setCellValue("Atividade");
-		excelHeader.createCell(4).setCellValue("Frente de Trabalho");
-		excelHeader.createCell(5).setCellValue("Pessoa");
-		excelHeader.createCell(6).setCellValue("Quantidade de Horas");
-		excelHeader.createCell(7).setCellValue("Hora Extra");
-		excelHeader.createCell(8).setCellValue("Data");
-		excelHeader.createCell(9).setCellValue("Anotação");
+		excelHeader.createCell(4).setCellValue("Retrabalho");
+		excelHeader.createCell(5).setCellValue("Frente de Trabalho");
+		excelHeader.createCell(6).setCellValue("Pessoa");
+		excelHeader.createCell(7).setCellValue("Quantidade de Horas");
+		excelHeader.createCell(8).setCellValue("Hora Extra");
+		excelHeader.createCell(9).setCellValue("Data");
+		excelHeader.createCell(10).setCellValue("Anotação");
 	}
 	
 	public void setExcelRows(HSSFSheet excelSheet, List<TimeSheet> timesheetList){
@@ -56,12 +57,13 @@ public class TimesheetDailyExcelView extends AbstractExcelView {
 			excelRow.createCell(1).setCellValue(timesheet.getProject().getName());
 			excelRow.createCell(2).setCellValue(timesheet.getCategory().getDescription());
 			excelRow.createCell(3).setCellValue(timesheet.getTask().getDescription());
-			excelRow.createCell(4).setCellValue(timesheet.getWorkGroup()==null?"":timesheet.getWorkGroup().getName());
-			excelRow.createCell(5).setCellValue(timesheet.getPerson().getName());
-			excelRow.createCell(6).setCellValue(timesheet.getWorkHours().doubleValue());
-			excelRow.createCell(7).setCellValue(timesheet.getOvertime()?"S":"N");
-			excelRow.createCell(8).setCellValue(dateFormat.format(timesheet.getOccurrenceDate()));
-			excelRow.createCell(9).setCellValue(timesheet.getNote());
+			excelRow.createCell(4).setCellValue(timesheet.getTask().getRework()?"S":"N");
+			excelRow.createCell(5).setCellValue(timesheet.getWorkGroup()==null?"":timesheet.getWorkGroup().getName());
+			excelRow.createCell(6).setCellValue(timesheet.getPerson().getName());
+			excelRow.createCell(7).setCellValue(timesheet.getWorkHours().doubleValue());
+			excelRow.createCell(8).setCellValue(timesheet.getOvertime()?"S":"N");
+			excelRow.createCell(9).setCellValue(dateFormat.format(timesheet.getOccurrenceDate()));
+			excelRow.createCell(10).setCellValue(timesheet.getNote());
 		}
 	}
 	

@@ -10,10 +10,10 @@
         <field:select field="task" id="c_com_stefanini_bob_management_domain_TimeSheet_task" itemValue="id" items="${tasks}" path="/tasks" required="true" z="user-managed"/>
         <field:input decimalMin="0" field="workHours" id="c_com_stefanini_bob_management_domain_TimeSheet_workHours" required="true" validationMessageCode="field_invalid_number" z="M96cY+mSa0H+QG6FkBbdWJeJCv0="/>
         <field:checkbox field="overtime" id="c_com_stefanini_bob_management_domain_TimeSheet_overtime" z="Dg/ASoLddmYJkKsbSEMkQlVOuB4="/>
-        <sec:authorize access="hasAnyRole(['ROLE_ADMIN', 'ROLE_MANAGER'])">
+        <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')">
             <field:datetime dateTimePattern="${timeSheet_occurrencedate_date_format}" daysFuture="0" daysPast="30" field="occurrenceDate" id="c_com_stefanini_bob_management_domain_TimeSheet_occurrenceDate" required="true" z="user-managed"/>
         </sec:authorize>
-        <sec:authorize access="!hasAnyRole(['ROLE_ADMIN', 'ROLE_MANAGER'])">
+        <sec:authorize access="!hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')">
             <field:datetime dateTimePattern="${timeSheet_occurrencedate_date_format}" daysFuture="0" daysPast="${daysPast}" field="occurrenceDate" id="c_com_stefanini_bob_management_domain_TimeSheet_occurrenceDate" required="true" z="Izb9Byv4KWTsn2CbUamqnOiRe2s="/>/
         </sec:authorize>
         <field:textarea field="note" id="c_com_stefanini_bob_management_domain_TimeSheet_note" z="HoyePiIVz3HMDNTuWk7hAnPUStc="/>

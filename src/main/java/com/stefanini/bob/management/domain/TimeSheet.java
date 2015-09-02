@@ -44,7 +44,7 @@ public class TimeSheet {
     /**
      */
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "M-")
+    @DateTimeFormat(pattern="dd/MM/yyyy")
     private Date occurrenceDate;
 
     /**
@@ -63,6 +63,10 @@ public class TimeSheet {
     @Digits(integer = 2, fraction = 1)
     private BigDecimal workHours;
 
+    public String getStringfyOvertime(){
+    	return overtime?"Não":"Sim";
+    }
+    
     /**
      */
     @ManyToOne
