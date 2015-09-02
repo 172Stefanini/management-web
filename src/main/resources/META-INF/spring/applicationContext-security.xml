@@ -4,12 +4,20 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+    <!-- Enable annotations security-->
+    <global-method-security secured-annotations="enabled" pre-post-annotations="enabled"/>
     <!-- HTTP security configurations -->
-    <http auto-config="true" use-expressions="true">
+    <http auto-config="true" use-expressions="true" >
         <form-login login-processing-url="/resources/j_spring_security_check" login-page="/login" authentication-failure-url="/login?login_error=t" />
         <logout logout-url="/resources/j_spring_security_logout" />
         <!-- Configure these elements to secure URIs in your application -->
         <intercept-url pattern="/choices/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/categorys/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/tasks/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/projects/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/workgroups/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/people/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/people/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/member/**" access="isAuthenticated()" />
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/login/**" access="permitAll" />
@@ -21,10 +29,67 @@
         <authentication-provider>
             <password-encoder hash="sha-256" />
             <user-service>
-                <user name="admin" password="8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" authorities="ROLE_ADMIN" />
-                <user name="user" password="04f8996da763b7a969b1028ee3007569eaf3a635486ddab211d512c85b9df8fb" authorities="ROLE_MANAGER" />
-                <user name="elucca" password="18eeff441fe39c758835bca574e3302accab0f243f590fa9fa6fb12badc6e95f" authorities="ROLE_USER" />
-                <user name="lafaiete" password="ff28efeaee07d037276ded3f56cdf37648a0084ff86c77c5863d93c304b3c569" authorities="ROLE_USER" />
+                <user name="asilva" password="73c026c5cd524e69876e57eceeba977f01b8868639e799673cc36dfe60a8724a" authorities="ROLE_USER" />
+				<user name="aoliveira" password="5f9cffd82bcb896d76e98b8fe4f2c15820fb2eb31388cd315905738b34f9e192" authorities="ROLE_USER" />
+				<user name="abeghini" password="cadca59c49ec1fa4e9f329464a46d3b135f47c43aca881da3cf7fffc73a91914" authorities="ROLE_USER" />
+				<user name="asantos" password="cadca59c49ec1fa4e9f329464a46d3b135f47c43aca881da3cf7fffc73a91914" authorities="ROLE_USER" />
+				<user name="aleite" password="fb383bd2ff039acb1ef5b28bd01980fee3aaf7a615ea728a4c766e28dc80cadd" authorities="ROLE_ADMIN" />
+				<user name="asoares" password="4898654b9a5df7dd6ec493d0f51a3d58886df28c4025efc0a37ee4b731ad5f0a" authorities="ROLE_USER" />
+				<user name="avalentim" password="1d1bbe7625080515268221c5d9dd9cb46debfdb3afc0a1df235529704dcc2849" authorities="ROLE_USER" />
+				<user name="bjustino" password="7d57f7bf86f6e4ee24d3b3960fe01fd40ac038b1ffc58be49e02744938cb8aa5" authorities="ROLE_USER" />
+				<user name="bsilva" password="4f59703d52950da0355c849e9dc21b8154acb2c5c72eb27056cf5ade2bc05da4" authorities="ROLE_USER" />
+				<user name="bcasillo" password="63169b3ca664223773700f0edd07cdf872cb74e6f1a5d979b6c99138297e2885" authorities="ROLE_MANAGER" />
+				<user name="cfrois" password="9d1a2292778a7a60afd2f3296d6ea723a21d39ec5b715d05288068bfd84aa6b6" authorities="ROLE_USER" />
+				<user name="cleandro" password="4898654b9a5df7dd6ec493d0f51a3d58886df28c4025efc0a37ee4b731ad5f0a" authorities="ROLE_USER" />
+				<user name="csobrinho" password="f156e20555ce1a1233619a5044d94d7e5e520444db264e7bfffbcc3487fc7a29" authorities="ROLE_USER" />
+				<user name="csanches" password="6a3228ad8bb2cff7c2791bbd0c006827c02974db0f67ef1ba4293a93e0be289d" authorities="ROLE_USER" />
+				<user name="coliveira" password="2e905e370853d8de6cccd23f7c9adcc7ea620df0e5b9f8af2c1d116d5ad73d92" authorities="ROLE_USER" />
+				<user name="ccastro" password="173448f2f2e6fdfd873b399d2aa734b970b3b2a530d583c025881a73b35fb98b" authorities="ROLE_USER" />
+				<user name="cmomesso" password="84dc45e121d77403e87c6a93e2dfd4239eaed8c41378c4253b3df84558403c97" authorities="ROLE_USER" />
+				<user name="ddrager" password="377809da1595706e656ec6aca19f9f37204dfd6b16ca49219039514556899cbb" authorities="ROLE_USER" />
+				<user name="dcezar" password="d43de3be7a7a4c7203af1aac35c727076b2651722512c164f1384d14c52a9142" authorities="ROLE_USER" />
+				<user name="dortiz" password="b618dd8edfc68305c42ed381623a80858a0701d2f495fa27f4e013fa7b860ac8" authorities="ROLE_USER" />
+				<user name="erossi" password="173448f2f2e6fdfd873b399d2aa734b970b3b2a530d583c025881a73b35fb98b" authorities="ROLE_USER" />
+				<user name="eluz" password="e4dad473dcd363f1cdc3c97b608020aea2770f74989ea434444024928086c731" authorities="ROLE_USER" />
+				<user name="fnascimento" password="71e2e5b94629403b1898be9b3dc30f43ca5f72ad744a8e740763d679b255165a" authorities="ROLE_USER" />
+				<user name="fsouza" password="0398826e32db3d58c6e677022ada9b60e7d602f715f79f8bdefafe4a3ce2c804" authorities="ROLE_MANAGER" />
+				<user name="fsilva" password="73c026c5cd524e69876e57eceeba977f01b8868639e799673cc36dfe60a8724a" authorities="ROLE_USER" />
+				<user name="gconceicao" password="9f7cf513142f82324ad4745aa08a5b47ee3c21106e8761a6044e8277a1bdbb00" authorities="ROLE_USER" />
+				<user name="glima" password="c4e5784086813d9d7d1b89ecb0e115465a8e6b60a4858cdb5ed8185fbeb690b4" authorities="ROLE_USER" />
+				<user name="jperondini" password="ba9226d7cf6726689b5f60e8bab98ecf1da43ea461d627b27727e2d26b76cfd8" authorities="ROLE_USER" />
+				<user name="jjunior" password="6e6be78f40342d2a10777cc8e75a3f31f16417e54bf48387a7d239c5bc4c1ca5" authorities="ROLE_USER" />
+				<user name="jmarques" password="f723cf7ca17d745c7a03eb1f7269639fffc658dec3025c8e83bf7e86061dccc2" authorities="ROLE_USER" />
+				<user name="jborges" password="499c2dd7b3d17d5ba25d4d83bdd0d6087b26cf5970dbcbccc469081fa499b9b3" authorities="ROLE_USER" />
+				<user name="jcosta" password="9b638bac226163073b8e6f2f1110e948f83b8e2ed108de40df849f21697d14cb" authorities="ROLE_USER" />
+				<user name="lblota" password="0c6f7bf8809d1a97587f0f72783109868983fb3480e2ad2f0f4fd68e53c1e648" authorities="ROLE_USER" />
+				<user name="lramos" password="07998222e38c366075ec1f95294f0485183df4798a869920be606b948a50f3d4" authorities="ROLE_USER" />
+				<user name="ltorres" password="6134b90c0c518661d7d0c9c4c6c1f6faf34fac56fcb27d2df0a05867cf25aea5" authorities="ROLE_USER" />
+				<user name="lpereira" password="4f59703d52950da0355c849e9dc21b8154acb2c5c72eb27056cf5ade2bc05da4" authorities="ROLE_USER" />
+				<user name="lavante" password="1d1bbe7625080515268221c5d9dd9cb46debfdb3afc0a1df235529704dcc2849" authorities="ROLE_USER" />
+				<user name="lhayashida" password="cc23dbe3a665c4346c8dd0f59848c4342a610bf5ec5b6b9e28551b5054253236" authorities="ROLE_USER" />
+				<user name="lfavaretto" password="214e341d707d64fe1c36bf033af0e2c4f659475e67018b59ffff6830901c8532" authorities="ROLE_USER" />
+				<user name="lmoraes" password="a22c80871d94a68408972989637775a41364bedf2d84f0f5d856cdcb6ee19c18" authorities="ROLE_USER" />
+				<user name="lamaro" password="a61ebdb04f7eef4f1329f1dfd96ded00d6d86a5e4175d1e6027b03bdab208158" authorities="ROLE_USER" />
+				<user name="lmoritsugu" password="d3a9f6ce0d7d9ff24c5d236f885f15e75e4e49ea026764469c084475c830141b" authorities="ROLE_MANAGER" />
+				<user name="mfilho" password="493d8f9c9d23fa9c87e64e738f0a87df904f278ef1ba2bd66147c4b8c4f7a348" authorities="ROLE_USER" />
+				<user name="msilva" password="cba109a5e6dc71043066d2c0eb4971816fc591604c6da73ad8002be467a448de" authorities="ROLE_USER" />
+				<user name="mvinicius" password="ebfb96bc832db283d602d627995536c1d50bd6e322ffad28953414de52a00158" authorities="ROLE_USER" />
+				<user name="mnogueira" password="cccd1c034f7e45d1ba2b43f3c693eca28777fb3aa9614bf0c0b0a08f4e6dc64e" authorities="ROLE_USER" />
+				<user name="psantos" password="423b41138ae82c8b6e575cf444df2632c9fbe0ed990a1a19f9e07898303300fb" authorities="ROLE_USER" />
+				<user name="pmanuel" password="ab33a1ef44a28625e20d9dc1ff1c40b8a5476523caf11799bb674275ed0b8a3b" authorities="ROLE_USER" />
+				<user name="rnero" password="ec3a974701b93a1193a4f6b3d74798753254ac218af84ba3013ed16c77f98e1c" authorities="ROLE_USER" />
+				<user name="rmoises" password="138208c2e32fb72a539b0b87cbb38aee7b190b21e67ea42209b3549d6a8bfdc5" authorities="ROLE_MANAGER" />
+				<user name="rqueiroz" password="f93b09ed137fcc62c4e953730d74f9bc63a8052fafb7620e3e6ec31152e62a68" authorities="ROLE_USER" />
+				<user name="rcastro" password="ed39387ef1ea5290b30e175e9ee8045ac7df5b4e039a460bca9836cb8db2dd22" authorities="ROLE_USER" />
+				<user name="rkisahleitner" password="5f026deaeb0265d5c613d354d9ab7c9e96e90a438eb91f47111606c3a3bb9114" authorities="ROLE_USER" />
+				<user name="ssantos" password="839f730c3a7913e2a8860ed7bf5fb45a582b74bccdc1366b69748859b9c5e8e2" authorities="ROLE_USER" />
+				<user name="ssilva" password="32d61490e8c1a7e56d468abcd4a153c22e1786f538beb90e18195ddfd14423fe" authorities="ROLE_USER" />
+				<user name="tpolli" password="ec3a974701b93a1193a4f6b3d74798753254ac218af84ba3013ed16c77f98e1c" authorities="ROLE_USER" />
+				<user name="tgalvao" password="3334d8a0e2057a86d440c4c8a139909726b960624e68140a760de7325d579d8b" authorities="ROLE_USER" />
+				<user name="voliveira" password="fc8eb4c825a4e8af83af47746b5db14daacdc3738b8e487dd24e708a1784cefd" authorities="ROLE_USER" />
+				<user name="wavante" password="f3ec3d2f72572b4ebe8cc0454a693e76d0131b747c21a8a88a2d9b0d1db1122d" authorities="ROLE_USER" />
+				<user name="wbonissoni" password="969d994c08ea97d2af748ffbb95dd8ffe0f69f582aad6d41f7477c749515fa6e" authorities="ROLE_USER" />
+				<user name="wsantana" password="62ef3cf4b43ce0c542607d00047abe1d5c4bf206075d294b66a7b0581ce204fa" authorities="ROLE_USER" />                
             </user-service>
         </authentication-provider>
     </authentication-manager>

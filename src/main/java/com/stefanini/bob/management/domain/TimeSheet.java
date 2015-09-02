@@ -1,6 +1,7 @@
 package com.stefanini.bob.management.domain;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.ManyToOne;
@@ -73,6 +74,8 @@ public class TimeSheet {
     private Project project;
 
 	public static List<TimeSheet> findTimeSheetEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder, List<Person> persons) {
+		if(persons.isEmpty()) return new LinkedList<TimeSheet>();
+		
         String jpaQuery = "SELECT o FROM TimeSheet o WHERE o.person in (:listPersons)";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
@@ -87,6 +90,8 @@ public class TimeSheet {
     }
 
 	public static List<TimeSheet> findAllTimeSheets(String sortFieldName, String sortOrder, List<Person> persons) {
+		if(persons.isEmpty()) return new LinkedList<TimeSheet>();
+		
         String jpaQuery = "SELECT o FROM TimeSheet o  WHERE o.person in (:listPersons)";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;

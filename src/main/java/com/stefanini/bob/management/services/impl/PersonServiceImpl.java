@@ -37,6 +37,9 @@ public class PersonServiceImpl implements PersonService {
 	public List<Person> findByManager(Person person){
 		
 		List<Project> listOfProjects = projectService.findByPerson(person);
+		
+		if(listOfProjects.isEmpty()) return new LinkedList<Person>();
+		
 		List<Long> ids =  new LinkedList<Long>();
 		for (Project project : listOfProjects) {
 			ids.add(project.getId());
