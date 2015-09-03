@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.TypedQuery;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
@@ -65,14 +66,35 @@ public class TimeSheet {
     private BigDecimal workHours;
 
     public String getStringfyOvertime(){
-    	return overtime?"Não":"Sim";
+    	return overtime?"Sim":"Não";
     }
     
     /**
      */
     @ManyToOne
     private Project project;
-
+    
+    @Transient
+    private Boolean deleteAllowed = true;
+    @Transient
+    private Boolean updateAllowed = true;
+    
+    
+    public String getDeleteButton(){
+    	return "<form id='command' action='/management/timesheets/" + this.getId() + "' method='post' style='display:" + (this.getDeleteAllowed()?"inline":"none") + "'>" +
+    			    "<input type='hidden' name='_method' value='DELETE'>" +
+    				"<input onclick=\"return confirm('Você tem certeza que quer remover este item?');\" value='Remover Registro de Horas' " + 
+    					   "type='image' title='Remover Registro de Horas' src='/management/resources/images/delete.png' class='image' alt='Remover Registro de Horas'>" + 
+    				"<input value='1' type='hidden' name='page'><input value='10' type='hidden' name='size'>" +
+    			"</form>";
+    }
+    
+    public String getEditButton(){
+    	return "<a title='Atualizar Registro de Horas' alt='Atualizar Registro de Horas' href='/management/timesheets/" + this.getId() + "?form' style='display:" + (this.getUpdateAllowed()?"inline":"none") + "'>"
+    			+ "<img title='Atualizar Registro de Horas' src='/management/resources/images/update.png' class='image' alt='Atualizar Registro de Horas'>"
+    		 + "</a>";
+    }
+    
 	public static List<TimeSheet> findTimeSheetEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder, List<Person> persons) {
 		if(persons.isEmpty()) return new LinkedList<TimeSheet>();
 		
@@ -105,4 +127,20 @@ public class TimeSheet {
         
         return query.getResultList();
     }
+
+	public Boolean getDeleteAllowed() {
+		return deleteAllowed;
+	}
+
+	public void setDeleteAllowed(Boolean deleteAllowed) {
+		this.deleteAllowed = deleteAllowed;
+	}
+
+	public Boolean getUpdateAllowed() {
+		return updateAllowed;
+	}
+
+	public void setUpdateAllowed(Boolean updateAllowed) {
+		this.updateAllowed = updateAllowed;
+	}
 }
