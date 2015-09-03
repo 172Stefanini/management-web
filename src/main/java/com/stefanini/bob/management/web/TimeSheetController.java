@@ -61,16 +61,16 @@ public class TimeSheetController {
     	List<WorkGroup> listWorkGroupToShow = new ArrayList<WorkGroup>();
     	
 		if(!listPeopleToShow.isEmpty())
-			listProjectsToShow.addAll(projectService.findByPerson(listPeopleToShow.get(0)));
+			listProjectsToShow.addAll(projectService.findByPerson(listPeopleToShow.get(timeSheet.getPerson()==null?0:listPeopleToShow.indexOf(timeSheet.getPerson()))));
 		
 		if(!listProjectsToShow.isEmpty())
-			listCategoriesToShow.addAll(categoryService.findByProject(listProjectsToShow.get(0)));
+			listCategoriesToShow.addAll(categoryService.findByProject(listProjectsToShow.get(timeSheet.getProject()==null?0:listProjectsToShow.indexOf(timeSheet.getProject()))));
 		
 		if(!listCategoriesToShow.isEmpty())
-			listTasksToShow.addAll(taskService.findByCategory(listCategoriesToShow.get(0)));
+			listTasksToShow.addAll(taskService.findByCategory(listCategoriesToShow.get(timeSheet.getCategory()==null?0:listCategoriesToShow.indexOf(timeSheet.getCategory()))));
 
 		if(!listPeopleToShow.isEmpty())
-			listWorkGroupToShow.addAll(workGroupService.findByPerson(listPeopleToShow.get(0)));
+			listWorkGroupToShow.addAll(workGroupService.findByPerson(listPeopleToShow.get(timeSheet.getPerson()==null?0:listPeopleToShow.indexOf(timeSheet.getPerson()))));
 		
 		timeSheet.setOccurrenceDate(new Date());
 		
@@ -179,6 +179,9 @@ public class TimeSheetController {
     	}else{
         	listPeopleToFilter.add(loggedPerson);
     	}
+		
+		listPeopleToFilter.remove(loggedPerson);
+		listPeopleToFilter.add(0, loggedPerson);
 		
 		return listPeopleToFilter;
 	}
