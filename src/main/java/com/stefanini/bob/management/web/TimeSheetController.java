@@ -49,6 +49,12 @@ public class TimeSheetController {
 	@Autowired
     private WorkGroupService workGroupService;
 	
+	private Person person;
+	
+	private Date filterDataFrom;
+	
+	private Date filterDataTo;
+	
 	private SecurityContextUtils securityContextUtils;
 
     void populateEditForm(Model uiModel, TimeSheet timeSheet) {
@@ -139,6 +145,13 @@ public class TimeSheetController {
 		
         return new JSONSerializer().serialize(tasks);
     }
+	
+	@RequestMapping(params = "find")
+    public String find(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {
+        		
+		
+		return "timesheets/list";
+    }
 
 	@RequestMapping(produces = "text/html")
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
@@ -184,5 +197,35 @@ public class TimeSheetController {
 		listPeopleToFilter.add(0, loggedPerson);
 		
 		return listPeopleToFilter;
+	}
+
+
+	public Person getPerson() {
+		return person;
+	}
+
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+
+	public Date getFilterDataFrom() {
+		return filterDataFrom;
+	}
+
+
+	public void setFilterDataFrom(Date filterDataFrom) {
+		this.filterDataFrom = filterDataFrom;
+	}
+
+
+	public Date getFilterDataTo() {
+		return filterDataTo;
+	}
+
+
+	public void setFilterDataTo(Date filterDataTo) {
+		this.filterDataTo = filterDataTo;
 	}
 }
