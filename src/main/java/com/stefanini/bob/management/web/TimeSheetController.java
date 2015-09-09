@@ -2,10 +2,10 @@ package com.stefanini.bob.management.web;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
@@ -26,6 +26,7 @@ import com.stefanini.bob.management.services.PersonService;
 import com.stefanini.bob.management.services.ProjectService;
 import com.stefanini.bob.management.services.TaskService;
 import com.stefanini.bob.management.services.WorkGroupService;
+import com.stefanini.bob.management.utils.DateTimeUtils;
 
 import flexjson.JSONSerializer;
 
@@ -49,10 +50,12 @@ public class TimeSheetController {
 	@Autowired
     private WorkGroupService workGroupService;
 	
-	private Person person;
+	private Long personId;
 	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date filterDataFrom;
 	
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date filterDataTo;
 	
 	private SecurityContextUtils securityContextUtils;
@@ -90,10 +93,8 @@ public class TimeSheetController {
         uiModel.addAttribute("workgroups", listWorkGroupToShow);
         
         Integer daysPast = new Integer(1);
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(new Date());
-        calendar.add(Calendar.DAY_OF_MONTH, -1);
-        if(calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY)
+        Date yesterday = DateTimeUtils.add(new Date(), Calendar.DAY_OF_MONTH, -1);
+        if(DateTimeUtils.isMonday(yesterday));
         	daysPast = 3;
         
         uiModel.addAttribute("daysPast", daysPast);
@@ -147,7 +148,7 @@ public class TimeSheetController {
     }
 	
 	@RequestMapping(params = "find")
-    public String find(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size) {
+    public String find(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         		
 		
 		return "timesheets/list";
@@ -166,6 +167,15 @@ public class TimeSheetController {
         } else {
             uiModel.addAttribute("timesheets", TimeSheet.findAllTimeSheets(sortFieldName, sortOrder, listPeopleToFilter));
         }
+		
+		
+		this.filterDataFrom = DateTimeUtils.add(new Date(), Calendar.DAY_OF_MONTH, -30);
+		this.filterDataTo = new Date();
+		
+		uiModel.addAttribute("timesheet", this);
+		uiModel.addAttribute("people", listPeopleToFilter);
+		
+		
         addDateTimeFormatPatterns(uiModel);
         return "timesheets/list";
     }
@@ -200,16 +210,6 @@ public class TimeSheetController {
 	}
 
 
-	public Person getPerson() {
-		return person;
-	}
-
-
-	public void setPerson(Person person) {
-		this.person = person;
-	}
-
-
 	public Date getFilterDataFrom() {
 		return filterDataFrom;
 	}
@@ -219,7 +219,6 @@ public class TimeSheetController {
 		this.filterDataFrom = filterDataFrom;
 	}
 
-
 	public Date getFilterDataTo() {
 		return filterDataTo;
 	}
@@ -228,4 +227,15 @@ public class TimeSheetController {
 	public void setFilterDataTo(Date filterDataTo) {
 		this.filterDataTo = filterDataTo;
 	}
+
+
+	public Long getPersonId() {
+		return personId;
+	}
+
+
+	public void setPersonId(Long personId) {
+		this.personId = personId;
+	}
+
 }
