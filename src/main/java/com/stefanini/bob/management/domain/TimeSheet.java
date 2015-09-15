@@ -73,26 +73,48 @@ public class TimeSheet {
     @ManyToOne
     private Project project;
 
-	public static List<TimeSheet> findTimeSheetEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder, List<Person> persons) {
+	public static List<TimeSheet> findTimeSheetEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder, List<Person> persons, Date from, Date to, Person of) {
 		if(persons.isEmpty()) return new LinkedList<TimeSheet>();
 		
+		
         String jpaQuery = "SELECT o FROM TimeSheet o WHERE o.person in (:listPersons)";
+        
+        if(from!=null && to !=null)
+        	jpaQuery+= " AND o.occurrenceDate BETWEEN :from AND :to";
+        
+        if(of!=null)
+        	jpaQuery+= " AND o.person = :of";
+        
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
                 jpaQuery = jpaQuery + " " + sortOrder;
             }
         }
+
         TypedQuery<TimeSheet> query = entityManager().createQuery(jpaQuery, TimeSheet.class);
         query.setParameter("listPersons", persons);
+        if(from!=null && to !=null){
+	    	query.setParameter("from", from);
+	    	query.setParameter("to", to);
+        }
+        if(of!=null)
+        	query.setParameter("of", of);
         
         return query.setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
 
-	public static List<TimeSheet> findAllTimeSheets(String sortFieldName, String sortOrder, List<Person> persons) {
+	public static List<TimeSheet> findAllTimeSheets(String sortFieldName, String sortOrder, List<Person> persons, Date from, Date to, Person of) {
 		if(persons.isEmpty()) return new LinkedList<TimeSheet>();
 		
         String jpaQuery = "SELECT o FROM TimeSheet o  WHERE o.person in (:listPersons)";
+
+        if(from!=null && to !=null)
+        	jpaQuery+= " AND o.occurrenceDate BETWEEN :from AND :to";
+        
+        if(of!=null)
+        	jpaQuery+= " AND o.person = :of";
+
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
@@ -102,6 +124,12 @@ public class TimeSheet {
         
         TypedQuery<TimeSheet> query = entityManager().createQuery(jpaQuery, TimeSheet.class);
         query.setParameter("listPersons", persons);
+        if(from!=null && to !=null){
+	    	query.setParameter("from", from);
+	    	query.setParameter("to", to);
+        }
+        if(of!=null)
+        	query.setParameter("of", of);
         
         return query.getResultList();
     }

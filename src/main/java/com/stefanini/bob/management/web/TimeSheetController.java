@@ -50,13 +50,7 @@ public class TimeSheetController {
 	@Autowired
     private WorkGroupService workGroupService;
 	
-	private Long personId;
-	
-	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private Date filterDataFrom;
-	
-	@DateTimeFormat(pattern="dd/MM/yyyy")
-	private Date filterDataTo;
+	private List<TimeSheet> listTimesheet;
 	
 	private SecurityContextUtils securityContextUtils;
 
@@ -148,44 +142,79 @@ public class TimeSheetController {
     }
 	
 	@RequestMapping(params = "find")
-    public String find(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
-        		
+    public String find(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel,
+    		@RequestParam(value = "filterDataFrom", required = false) @DateTimeFormat(pattern="dd/MM/yyyy") Date filterDataFrom, 
+    		@RequestParam(value = "filterDataTo", required = false) @DateTimeFormat(pattern="dd/MM/yyyy") Date filterDataTo,
+    		@RequestParam(value = "personId", required = false) Long personId) {
+		List<Person> listPeopleToFilter = getListOfPeopleByPermission();
+
+		Person personToPutFirst = null;
+		for (Person person : listPeopleToFilter) {
+			if(person.getId().longValue() == personId.longValue())
+				personToPutFirst = person;
+		}
 		
+		
+		find(page, size, null, null, uiModel, listPeopleToFilter, filterDataFrom, filterDataTo, personToPutFirst);
+		
+		
+		Person allPerson = new Person();
+		allPerson.setId(0L);
+		allPerson.setName("Todos");
+		listPeopleToFilter.add(0, allPerson);
+		
+		if(personToPutFirst!=null){
+			listPeopleToFilter.remove(personToPutFirst);
+			listPeopleToFilter.add(0, personToPutFirst);
+		}
+		
+		uiModel.addAttribute("filter", new TimesheetFilter(filterDataFrom, filterDataTo, personId));
+		
+		uiModel.addAttribute("people", listPeopleToFilter);
+        addDateTimeFormatPatterns(uiModel);
 		return "timesheets/list";
     }
 
 	@RequestMapping(produces = "text/html")
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
 		List<Person> listPeopleToFilter = getListOfPeopleByPermission();
+		Date filterDataFrom = DateTimeUtils.add(new Date(), Calendar.DAY_OF_MONTH, -30);
+		Date filterDataTo = new Date();
 		
-		if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
-            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("timesheets", TimeSheet.findTimeSheetEntries(firstResult, sizeNo, sortFieldName, sortOrder, listPeopleToFilter));
-            float nrOfPages = (float) timeSheetService.countAllTimeSheets() / sizeNo;
-            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
-        } else {
-            uiModel.addAttribute("timesheets", TimeSheet.findAllTimeSheets(sortFieldName, sortOrder, listPeopleToFilter));
-        }
-		
-		
-		this.filterDataFrom = DateTimeUtils.add(new Date(), Calendar.DAY_OF_MONTH, -30);
-		this.filterDataTo = new Date();
-		
+		find(page, size, sortFieldName, sortOrder, uiModel, listPeopleToFilter, filterDataFrom, filterDataTo, null);		
 		uiModel.addAttribute("timesheet", this);
+		
+		Person allPerson = new Person();
+		allPerson.setId(0L);
+		allPerson.setName("Todos");
+		listPeopleToFilter.add(0, allPerson);
 		uiModel.addAttribute("people", listPeopleToFilter);
-		
-		
+
+		uiModel.addAttribute("filter", new TimesheetFilter(filterDataFrom, filterDataTo, null));
         addDateTimeFormatPatterns(uiModel);
         return "timesheets/list";
     }
+
+
+	private void find(Integer page, Integer size, String sortFieldName,
+			String sortOrder, Model uiModel, List<Person> listPeopleToFilter,
+			Date filterDataFrom, Date filterDataTo, Person of) {
+		if (page != null || size != null) {
+            int sizeNo = size == null ? 10 : size.intValue();
+            final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
+            this.listTimesheet = TimeSheet.findTimeSheetEntries(firstResult, sizeNo, sortFieldName, sortOrder, listPeopleToFilter, filterDataFrom, filterDataTo, of);
+            uiModel.addAttribute("timesheets", this.listTimesheet);
+            float nrOfPages = (float) timeSheetService.countAllTimeSheets() / sizeNo;
+            uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
+        } else {
+        	this.listTimesheet = TimeSheet.findAllTimeSheets(sortFieldName, sortOrder, listPeopleToFilter, filterDataFrom, filterDataTo, of);
+            uiModel.addAttribute("timesheets", this.listTimesheet);
+        }
+	}
 	
 	@RequestMapping(params = "excel")
     public ModelAndView excelExport(Model uiModel) {
-		
-		List<Person> listPeopleToFilter = getListOfPeopleByPermission();
-		
-		return new ModelAndView("TimesheetDailyExcelView", "timesheetList", TimeSheet.findAllTimeSheets("", "", listPeopleToFilter));
+		return new ModelAndView("TimesheetDailyExcelView", "timesheetList", this.listTimesheet);
 
     }
 	
@@ -208,34 +237,4 @@ public class TimeSheetController {
 		
 		return listPeopleToFilter;
 	}
-
-
-	public Date getFilterDataFrom() {
-		return filterDataFrom;
-	}
-
-
-	public void setFilterDataFrom(Date filterDataFrom) {
-		this.filterDataFrom = filterDataFrom;
-	}
-
-	public Date getFilterDataTo() {
-		return filterDataTo;
-	}
-
-
-	public void setFilterDataTo(Date filterDataTo) {
-		this.filterDataTo = filterDataTo;
-	}
-
-
-	public Long getPersonId() {
-		return personId;
-	}
-
-
-	public void setPersonId(Long personId) {
-		this.personId = personId;
-	}
-
 }

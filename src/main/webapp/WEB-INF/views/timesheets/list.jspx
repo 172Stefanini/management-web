@@ -2,10 +2,10 @@
 <div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:spring="http://www.springframework.org/tags" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
-   	<form:find finderName="timesheetFinder" path="/timesheets" id="timesheetFinder" labelCode="menu_item_timesheet_list_label" modelAttribute="timesheet">
+   	<form:find finderName="timesheetFinder" path="/timesheets" id="timesheetFinder" labelCode="menu_item_timesheet_list_label" modelAttribute="filter">
     	<field:select field="personId" id="c_com_stefanini_bob_management_domain_TimeSheet_person" itemValue="id" itemLabel="name" items="${people}" path="/people" z="user-managed" style="width: 400px;"/>
-    	<field:datetime dateTimePattern="dd/MM/yyyy" field="filterDataFrom" id="filterDataFrom" required="true" z="user-managed" label="De:"/>
-    	<field:datetime dateTimePattern="dd/MM/yyyy" field="filterDataTo" id="filterDataTo" required="true" z="user-managed" label="Até:"/>
+    	<field:datetime dateTimePattern="dd/MM/yyyy" field="filterDataFrom" id="filterDataFrom" z="user-managed" label="De:"/>
+    	<field:datetime dateTimePattern="dd/MM/yyyy" field="filterDataTo" id="filterDataTo" z="user-managed" label="Até:"/>
    	</form:find>
     <page:list id="pl_com_stefanini_bob_management_domain_TimeSheet" items="${timesheets}" z="/3AbNREZ4n1n0wkOcQV93Xt6SSo=">
         <table:table data="${timesheets}" excelExport="true" id="l_com_stefanini_bob_management_domain_TimeSheet" path="/timesheets" z="user-managed">
