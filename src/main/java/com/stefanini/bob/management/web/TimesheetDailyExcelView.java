@@ -25,7 +25,7 @@ public class TimesheetDailyExcelView extends AbstractExcelView {
 			HSSFWorkbook workbook, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
-		HSSFSheet excelSheet = workbook.createSheet("Animal List");
+		HSSFSheet excelSheet = workbook.createSheet("TIMESHEET");
 		setExcelHeader(excelSheet);
 		
 		List<TimeSheet> timesheetList = (List<TimeSheet>) model.get("timesheetList");
