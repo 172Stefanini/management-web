@@ -11,6 +11,7 @@
 	        <menu:category id="c_person" z="Cz66KzcF6GdyygpbYfiE+EkFFFA=">
 	            <menu:item id="i_person_new" messageCode="global_menu_new" url="/people?form" z="IlD8NFD64X8egaRrgHbQeWKT68I="/>
 	            <menu:item id="i_person_list" messageCode="global_menu_list" url="/people?page=1&amp;size=${empty param.size ? 10 : param.size}" z="MFjeqYeiMgVzk2P/OWfFpXZhhS4="/>
+	            <menu:item id="i_person_list" messageCode="global_menu_list_pending" url="/people?pendings&amp;page=1&amp;size=${empty param.size ? 10 : param.size}" z="MFjeqYeiMgVzk2P/OWfFpXZhhS4="/>
 	        </menu:category>
 	        <menu:category id="c_project" z="u0PzRIwMDmEv/J6b8vbKakXGIdQ=">
 	            <menu:item id="i_project_new" messageCode="global_menu_new" url="/projects?form" z="1BazRC1rLnod0a+MpP1flWTvehA="/>
