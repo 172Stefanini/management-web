@@ -41,6 +41,7 @@ privileged aspect Person_Roo_Jpa_ActiveRecord {
         return entityManager().createQuery(jpaQuery, Person.class).getResultList();
     }
     
+        
     public static Person Person.findPerson(Long id) {
         if (id == null) return null;
         return entityManager().find(Person.class, id);
@@ -61,6 +62,8 @@ privileged aspect Person_Roo_Jpa_ActiveRecord {
         return entityManager().createQuery(jpaQuery, Person.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
+    
+        
     @Transactional
     public void Person.persist() {
         if (this.entityManager == null) this.entityManager = entityManager();
