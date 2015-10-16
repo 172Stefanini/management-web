@@ -12,5 +12,9 @@
         <field:display field="note" id="s_com_stefanini_bob_management_domain_TimeSheet_note" object="${timesheet}" z="wwZ7gjyOADxd9eTc1459iX4vy8Q="/>
         <field:display field="workHours" id="s_com_stefanini_bob_management_domain_TimeSheet_workHours" object="${timesheet}" z="zSBM8Ka+WoXTcSrEk25temqe7sg="/>
         <field:display field="project" id="s_com_stefanini_bob_management_domain_TimeSheet_project" object="${timesheet}" z="1Djl3bjbXu1NOAbY0iKZPWzVhQs="/>
+        <field:display field="deleteAllowed" id="s_com_stefanini_bob_management_domain_TimeSheet_deleteAllowed" object="${timesheet}" z="PD1fvFXZWfMXWuRHyaQ7an6x3Wk="/>
+        <field:display field="updateAllowed" id="s_com_stefanini_bob_management_domain_TimeSheet_updateAllowed" object="${timesheet}" z="j7PdDfixFbY3ayG4pRPwYx7rvKo="/>
+        <field:display field="taskComplete" id="s_com_stefanini_bob_management_domain_TimeSheet_taskComplete" object="${timesheet}" z="jyKPkQScl6aUM1Uxzx2ARMwLuJ0="/>
+        <field:display field="estimateFinish" id="s_com_stefanini_bob_management_domain_TimeSheet_estimateFinish" object="${timesheet}" z="g6ECzHFk8E/+9P/OhANGjr1gSXk="/>
     </page:show>
 </div>

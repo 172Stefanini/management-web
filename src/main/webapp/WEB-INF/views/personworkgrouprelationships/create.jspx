@@ -3,8 +3,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_com_stefanini_bob_management_domain_PersonWorkGroupRelationship" modelAttribute="personWorkGroupRelationship" path="/personworkgrouprelationships" render="${empty dependencies}" z="Po7qJ4s+f0FH2hEBkVjS4FSvIx0=">
-        <field:select field="person" id="c_com_stefanini_bob_management_domain_PersonWorkGroupRelationship_person" itemValue="id" items="${people}" path="/people" z="AzDJiLg4RDxCQWTxes73v5yjPHU=" style="width: 400px;"/>
-        <field:select field="workGroup" id="c_com_stefanini_bob_management_domain_PersonWorkGroupRelationship_workGroup" itemValue="id" items="${workgroups}" path="/workgroups" z="UjEz4DhzXAgIZESqQyUSHYT4Wio=" style="width: 400px;"/>
+        <field:select field="person" id="c_com_stefanini_bob_management_domain_PersonWorkGroupRelationship_person" itemValue="id" items="${people}" path="/people" style="width: 400px;" z="user-managed"/>
+        <field:select field="workGroup" id="c_com_stefanini_bob_management_domain_PersonWorkGroupRelationship_workGroup" itemValue="id" items="${workgroups}" path="/workgroups" style="width: 400px;" z="user-managed"/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_com_stefanini_bob_management_domain_PersonWorkGroupRelationship" render="${not empty dependencies}" z="DqMgcf9itFs9nL14GszMEZq9Djs="/>
 </div>

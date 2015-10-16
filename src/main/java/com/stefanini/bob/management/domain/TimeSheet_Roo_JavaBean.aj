@@ -86,4 +86,20 @@ privileged aspect TimeSheet_Roo_JavaBean {
         this.project = project;
     }
     
+    public Boolean TimeSheet.getTaskComplete() {
+        return this.taskComplete;
+    }
+    
+    public void TimeSheet.setTaskComplete(Boolean taskComplete) {
+        this.taskComplete = taskComplete;
+    }
+    
+    public BigDecimal TimeSheet.getEstimateFinish() {
+        return this.estimateFinish;
+    }
+    
+    public void TimeSheet.setEstimateFinish(BigDecimal estimateFinish) {
+        this.estimateFinish = estimateFinish;
+    }
+    
 }

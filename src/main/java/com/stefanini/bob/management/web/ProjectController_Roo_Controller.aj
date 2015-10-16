@@ -35,7 +35,6 @@ privileged aspect ProjectController_Roo_Controller {
         return "redirect:/projects/" + encodeUrlPathSegment(project.getId().toString(), httpServletRequest);
     }
     
-        
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String ProjectController.show(@PathVariable("id") Long id, Model uiModel) {
         uiModel.addAttribute("project", projectService.findProject(id));

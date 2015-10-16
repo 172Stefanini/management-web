@@ -200,7 +200,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<TimeSheet, String> ApplicationConversionServiceFactoryBean.getTimeSheetToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<com.stefanini.bob.management.domain.TimeSheet, java.lang.String>() {
             public String convert(TimeSheet timeSheet) {
-                return new StringBuilder().append(timeSheet.getOccurrenceDate()).append(' ').append(timeSheet.getNote()).append(' ').append(timeSheet.getWorkHours()).toString();
+                return new StringBuilder().append(timeSheet.getOccurrenceDate()).append(' ').append(timeSheet.getNote()).append(' ').append(timeSheet.getWorkHours()).append(' ').append(timeSheet.getEstimateFinish()).toString();
             }
         };
     }

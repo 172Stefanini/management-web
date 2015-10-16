@@ -75,7 +75,8 @@ public class TimeSheetController {
 		if(!listPeopleToShow.isEmpty())
 			listWorkGroupToShow.addAll(workGroupService.findByPerson(listPeopleToShow.get(timeSheet.getPerson()==null?0:listPeopleToShow.indexOf(timeSheet.getPerson()))));
 		
-		timeSheet.setOccurrenceDate(new Date());
+		if(timeSheet.getOccurrenceDate()==null)
+			timeSheet.setOccurrenceDate(new Date());
 		
     	
         uiModel.addAttribute("timeSheet", timeSheet);
@@ -145,6 +146,7 @@ public class TimeSheetController {
     public String find(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel,
     		@RequestParam(value = "filterDataFrom", required = false) @DateTimeFormat(pattern="dd/MM/yyyy") Date filterDataFrom, 
     		@RequestParam(value = "filterDataTo", required = false) @DateTimeFormat(pattern="dd/MM/yyyy") Date filterDataTo,
+    		@RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder,
     		@RequestParam(value = "personId", required = false) Long personId) {
 		List<Person> listPeopleToFilter = getListOfPeopleByPermission();
 
@@ -155,7 +157,7 @@ public class TimeSheetController {
 		}
 		
 		
-		find(page, size, null, null, uiModel, listPeopleToFilter, filterDataFrom, filterDataTo, personToPutFirst);
+		find(page, size, sortFieldName, sortOrder, uiModel, listPeopleToFilter, filterDataFrom, filterDataTo, personToPutFirst);
 		
 		
 		Person allPerson = new Person();
@@ -199,7 +201,7 @@ public class TimeSheetController {
 			String sortOrder, Model uiModel, List<Person> listPeopleToFilter,
 			Date filterDataFrom, Date filterDataTo, Person of) {
 		if (page != null || size != null) {
-            int sizeNo = size == null ? 10 : size.intValue();
+            int sizeNo = size == null ? 100 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
             this.listTimesheet = TimeSheet.findTimeSheetEntries(firstResult, sizeNo, sortFieldName, sortOrder, listPeopleToFilter, filterDataFrom, filterDataTo, of);
             uiModel.addAttribute("timesheets", this.listTimesheet);
