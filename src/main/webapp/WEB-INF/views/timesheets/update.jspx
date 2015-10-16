@@ -18,6 +18,6 @@
         </sec:authorize>
         <field:textarea field="note" id="c_com_stefanini_bob_management_domain_TimeSheet_note" z="HoyePiIVz3HMDNTuWk7hAnPUStc="/>
         <field:checkbox field="taskComplete" id="c_com_stefanini_bob_management_domain_TimeSheet_taskComplete" z="SPN9cqVwiaungEfdQ/bHDTgxSGk="/>
-        <field:input field="estimateFinish" id="c_com_stefanini_bob_management_domain_TimeSheet_estimateFinish" validationMessageCode="field_invalid_number" z="s4mW43R+Bovk5dyxxkI1oIxbrOk="/>
+        <field:input field="estimateFinish" id="c_com_stefanini_bob_management_domain_TimeSheet_estimateFinish" validationMessageCode="field_invalid_number" z="s4mW43R+Bovk5dyxxkI1oIxbrOk="  required="true"/>
     </form:update>
 </div>
