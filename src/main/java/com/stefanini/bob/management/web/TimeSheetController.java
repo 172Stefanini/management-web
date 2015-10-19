@@ -50,7 +50,11 @@ public class TimeSheetController {
 	@Autowired
     private WorkGroupService workGroupService;
 	
-	private List<TimeSheet> listTimesheet;
+	private Date filterDataFrom;
+	
+	private Date filterDataTo;
+	
+	private Person of;
 	
 	private SecurityContextUtils securityContextUtils;
 
@@ -200,19 +204,25 @@ public class TimeSheetController {
 	private void find(Integer page, Integer size, String sortFieldName,
 			String sortOrder, Model uiModel, List<Person> listPeopleToFilter,
 			Date filterDataFrom, Date filterDataTo, Person of) {
+		
+		this.filterDataFrom = filterDataFrom;
+		this.filterDataTo = filterDataTo;
+		this.of = of;
+		List<TimeSheet> listTimesheet = new ArrayList<TimeSheet>();
+		
 		if (page != null || size != null) {
-            int sizeNo = size == null ? 100 : size.intValue();
+            int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            this.listTimesheet = TimeSheet.findTimeSheetEntries(firstResult, sizeNo, sortFieldName, sortOrder, listPeopleToFilter, filterDataFrom, filterDataTo, of);
-            uiModel.addAttribute("timesheets", this.listTimesheet);
+            listTimesheet = TimeSheet.findTimeSheetEntries(firstResult, sizeNo, sortFieldName, sortOrder, listPeopleToFilter, filterDataFrom, filterDataTo, of);
+            uiModel.addAttribute("timesheets", listTimesheet);
             float nrOfPages = (float) timeSheetService.countAllTimeSheets() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
-        	this.listTimesheet = TimeSheet.findAllTimeSheets(sortFieldName, sortOrder, listPeopleToFilter, filterDataFrom, filterDataTo, of);
-            uiModel.addAttribute("timesheets", this.listTimesheet);
+        	listTimesheet = TimeSheet.findAllTimeSheets(sortFieldName, sortOrder, listPeopleToFilter, filterDataFrom, filterDataTo, of);
+            uiModel.addAttribute("timesheets", listTimesheet);
         }
 		
-		for (TimeSheet timeSheet : this.listTimesheet) {
+		for (TimeSheet timeSheet : listTimesheet) {
 			securityContextUtils = new SecurityContextUtils();
 			if(!(securityContextUtils.hasRole("ROLE_ADMIN") || securityContextUtils.hasRole("ROLE_MANAGER")) && 
 					DateTimeUtils.getDifferenceBetweenTwoDates(timeSheet.getOccurrenceDate(), new Date()) > 1){
@@ -221,12 +231,14 @@ public class TimeSheetController {
 			}
 		}
 		
-		uiModel.addAttribute("timesheets", this.listTimesheet);
+		uiModel.addAttribute("timesheets", listTimesheet);
 	}
 	
 	@RequestMapping(params = "excel")
     public ModelAndView excelExport(Model uiModel) {
-		return new ModelAndView("TimesheetDailyExcelView", "timesheetList", this.listTimesheet);
+		List<Person> listPeopleToFilter = getListOfPeopleByPermission();
+		List<TimeSheet> listTimesheet = TimeSheet.findAllTimeSheets(null, null, listPeopleToFilter, this.filterDataFrom, this.filterDataTo, this.of);
+		return new ModelAndView("TimesheetDailyExcelView", "timesheetList", listTimesheet);
 
     }
 	
