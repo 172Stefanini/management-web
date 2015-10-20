@@ -33,7 +33,7 @@
 	</spring:url>
 
 
-    <c:forEach var="i" begin="5" end="25" step="5">
+    <c:forEach var="i" begin="10" end="100" step="10">
       <c:choose>
         <c:when test="${size == i}">
           <c:out value="${i}" />

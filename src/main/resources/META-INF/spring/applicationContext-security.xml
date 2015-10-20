@@ -16,8 +16,7 @@
         <intercept-url pattern="/tasks/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/projects/**" access="hasRole('ROLE_ADMIN')" />
         <intercept-url pattern="/workgroups/**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/people/**" access="hasRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/people/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/people/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')" />
         <intercept-url pattern="/member/**" access="isAuthenticated()" />
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/login/**" access="permitAll" />

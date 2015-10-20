@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RooWebScaffold(path = "people", formBackingObject = Person.class)
 public class PersonController {
 	
-	@RequestMapping(params = "pendings", produces = "text/html")
+	@RequestMapping(value = "/pendings", produces = "text/html")
     public String pendings(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, @RequestParam(value = "sortFieldName", required = false) String sortFieldName, @RequestParam(value = "sortOrder", required = false) String sortOrder, Model uiModel) {
         if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();

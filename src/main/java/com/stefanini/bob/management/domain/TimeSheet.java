@@ -115,7 +115,7 @@ public class TimeSheet {
         if (persons.isEmpty()) return new LinkedList<TimeSheet>();
         String jpaQuery = "SELECT o FROM TimeSheet o  WHERE o.person in (:listPersons)";
         if (from != null && to != null) jpaQuery += " AND o.occurrenceDate BETWEEN :from AND :to";
-        if (of != null) jpaQuery += " AND o.person.id = :of";
+        if (of != null) jpaQuery += " AND o.person = :of";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
@@ -130,9 +130,7 @@ public class TimeSheet {
             query.setParameter("from", from, TemporalType.DATE);
             query.setParameter("to", to, TemporalType.DATE);
         }
-        
-        if (of != null) query.setParameter("of", of.getId());
-        
+        if (of != null) query.setParameter("of", of);
         return query.getResultList();
     }
 
