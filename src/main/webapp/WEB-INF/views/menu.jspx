@@ -6,8 +6,8 @@
         <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')">
             <menu:category id="c_person" z="Cz66KzcF6GdyygpbYfiE+EkFFFA=">
                 <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-                	<menu:item id="i_person_new" messageCode="global_menu_new" url="/people?form" z="IlD8NFD64X8egaRrgHbQeWKT68I="/>
-                	<menu:item id="i_person_list" messageCode="global_menu_list" url="/people?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+                    <menu:item id="i_person_new" messageCode="global_menu_new" url="/people?form" z="IlD8NFD64X8egaRrgHbQeWKT68I="/>
+                    <menu:item id="i_person_list" messageCode="global_menu_list" url="/people?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
                 </sec:authorize>
                 <menu:item id="i_person_list" messageCode="global_menu_list_pending" url="/people/pendings?page=1&amp;size=${empty param.size ? 10 : param.size}" z="MFjeqYeiMgVzk2P/OWfFpXZhhS4="/>
             </menu:category>
@@ -43,6 +43,10 @@
         <menu:category id="c_timesheet" z="vZI2UhVwD6iy95OWru6nPzmPey4=">
             <menu:item id="i_timesheet_new" messageCode="global_menu_new" url="/timesheets?form" z="FRFugRV3ynPs4g9usYNJ8Ign5FQ="/>
             <menu:item id="i_timesheet_list" messageCode="global_menu_list" url="/timesheets?page=1&amp;size=${empty param.size ? 10 : param.size}" z="yvaVGDSLUR1I4Lzn8GZPfdZADo4="/>
+        </menu:category>
+        <menu:category id="c_password" z="7+gWfZSC0b51+d9CNfGxBOFSRWs=">
+            <menu:item id="i_password_new" messageCode="global_menu_new" render="false" url="/passwords?form" z="user-managed"/>
+            <menu:item id="i_password_list" messageCode="global_menu_list" url="/passwords?page=1&amp;size=${empty param.size ? 10 : param.size}" z="Er1nfs2Et66a2TkTLl740oPLsgU="/>
         </menu:category>
     </menu:menu>
 </div>

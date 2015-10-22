@@ -8,16 +8,18 @@
         <field:select field="project" id="c_com_stefanini_bob_management_domain_TimeSheet_project" itemValue="id" items="${projects}" onChangeFunction="changeProject" path="/projects" style="width: 400px;" z="user-managed"/>
         <field:select field="category" id="c_com_stefanini_bob_management_domain_TimeSheet_category" itemValue="id" items="${categorys}" onChangeFunction="changeCategory" path="/categorys" style="width: 400px;" z="user-managed"/>
         <field:select field="task" id="c_com_stefanini_bob_management_domain_TimeSheet_task" itemValue="id" items="${tasks}" path="/tasks" required="true" style="width: 400px;" z="user-managed"/>
-        <field:input decimalMin="0" field="workHours" id="c_com_stefanini_bob_management_domain_TimeSheet_workHours" required="true" validationMessageCode="field_invalid_number" z="M96cY+mSa0H+QG6FkBbdWJeJCv0="/>
-        <field:checkbox field="overtime" id="c_com_stefanini_bob_management_domain_TimeSheet_overtime" z="Dg/ASoLddmYJkKsbSEMkQlVOuB4="/>
+        <field:input decimalMin="0" field="workHours" id="c_com_stefanini_bob_management_domain_TimeSheet_workHours" required="true" validationMessageCode="field_invalid_number" z="user-managed"/>
+        <field:checkbox field="overtime" id="c_com_stefanini_bob_management_domain_TimeSheet_overtime" z="user-managed"/>
         <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_MANAGER')">
             <field:datetime dateTimePattern="${timeSheet_occurrencedate_date_format}" daysFuture="30" daysPast="30" field="occurrenceDate" id="c_com_stefanini_bob_management_domain_TimeSheet_occurrenceDate" required="true" z="user-managed"/>
         </sec:authorize>
         <sec:authorize access="!(hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER'))">
-            <field:datetime dateTimePattern="${timeSheet_occurrencedate_date_format}" daysFuture="0" daysPast="${daysPast}" field="occurrenceDate" id="c_com_stefanini_bob_management_domain_TimeSheet_occurrenceDate" required="true" z="Izb9Byv4KWTsn2CbUamqnOiRe2s="/>/
+            <field:datetime dateTimePattern="${timeSheet_occurrencedate_date_format}" daysFuture="0" daysPast="${daysPast}" field="occurrenceDate" id="c_com_stefanini_bob_management_domain_TimeSheet_occurrenceDate" required="true" z="user-managed"/>/
         </sec:authorize>
-        <field:textarea field="note" id="c_com_stefanini_bob_management_domain_TimeSheet_note" z="HoyePiIVz3HMDNTuWk7hAnPUStc="/>
-        <field:checkbox field="taskComplete" id="c_com_stefanini_bob_management_domain_TimeSheet_taskComplete" z="SPN9cqVwiaungEfdQ/bHDTgxSGk="/>
-        <field:input field="estimateFinish" id="c_com_stefanini_bob_management_domain_TimeSheet_estimateFinish" validationMessageCode="field_invalid_number" z="s4mW43R+Bovk5dyxxkI1oIxbrOk="  required="true"/>
+        <field:textarea field="note" id="c_com_stefanini_bob_management_domain_TimeSheet_note" z="user-managed"/>
+        <field:checkbox field="taskComplete" id="c_com_stefanini_bob_management_domain_TimeSheet_taskComplete" z="user-managed"/>
+        <field:input field="estimateFinish" id="c_com_stefanini_bob_management_domain_TimeSheet_estimateFinish" validationMessageCode="field_invalid_number" z="user-managed"/>
+        <field:checkbox field="deleteAllowed" id="c_com_stefanini_bob_management_domain_TimeSheet_deleteAllowed" z="ykSSiDh32Knrd3lMEUUKVJbddn8=" render="false"/>
+        <field:checkbox field="updateAllowed" id="c_com_stefanini_bob_management_domain_TimeSheet_updateAllowed" z="Y16XIYL1WNQtejLkipSD9O4YQhc=" render="false"/>
     </form:update>
 </div>

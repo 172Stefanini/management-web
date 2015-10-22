@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="passwords/list">
+        <put-attribute name="body" value="/WEB-INF/views/passwords/list.jspx"/>
+    </definition>
+<definition extends="default" name="passwords/show">
+        <put-attribute name="body" value="/WEB-INF/views/passwords/show.jspx"/>
+    </definition>
+<definition extends="default" name="passwords/create">
+        <put-attribute name="body" value="/WEB-INF/views/passwords/create.jspx"/>
+    </definition>
+<definition extends="default" name="passwords/update">
+        <put-attribute name="body" value="/WEB-INF/views/passwords/update.jspx"/>
+    </definition>
+</tiles-definitions>

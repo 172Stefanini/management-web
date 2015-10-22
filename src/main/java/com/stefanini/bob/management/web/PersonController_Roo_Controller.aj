@@ -48,7 +48,6 @@ privileged aspect PersonController_Roo_Controller {
         return "people/show";
     }
     
-        
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String PersonController.update(@Valid Person person, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {

@@ -3,95 +3,97 @@
 
 package com.stefanini.bob.management.domain;
 
-import com.stefanini.bob.management.domain.TimeSheet;
+import com.stefanini.bob.management.domain.Password;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Transactional;
 
-privileged aspect TimeSheet_Roo_Jpa_ActiveRecord {
+privileged aspect Password_Roo_Jpa_ActiveRecord {
     
     @PersistenceContext
-    transient EntityManager TimeSheet.entityManager;
+    transient EntityManager Password.entityManager;
     
-    public static final EntityManager TimeSheet.entityManager() {
-        EntityManager em = new TimeSheet().entityManager;
+    public static final List<String> Password.fieldNames4OrderClauseFilter = java.util.Arrays.asList("keyPass", "person", "oldPassword");
+    
+    public static final EntityManager Password.entityManager() {
+        EntityManager em = new Password().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;
     }
     
-    public static long TimeSheet.countTimeSheets() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM TimeSheet o", Long.class).getSingleResult();
+    public static long Password.countPasswords() {
+        return entityManager().createQuery("SELECT COUNT(o) FROM Password o", Long.class).getSingleResult();
     }
     
-    public static List<TimeSheet> TimeSheet.findAllTimeSheets() {
-        return entityManager().createQuery("SELECT o FROM TimeSheet o", TimeSheet.class).getResultList();
+    public static List<Password> Password.findAllPasswords() {
+        return entityManager().createQuery("SELECT o FROM Password o", Password.class).getResultList();
     }
     
-    public static List<TimeSheet> TimeSheet.findAllTimeSheets(String sortFieldName, String sortOrder) {
-        String jpaQuery = "SELECT o FROM TimeSheet o";
+    public static List<Password> Password.findAllPasswords(String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM Password o";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
                 jpaQuery = jpaQuery + " " + sortOrder;
             }
         }
-        return entityManager().createQuery(jpaQuery, TimeSheet.class).getResultList();
+        return entityManager().createQuery(jpaQuery, Password.class).getResultList();
     }
     
-    public static TimeSheet TimeSheet.findTimeSheet(Long id) {
+    public static Password Password.findPassword(Long id) {
         if (id == null) return null;
-        return entityManager().find(TimeSheet.class, id);
+        return entityManager().find(Password.class, id);
     }
     
-    public static List<TimeSheet> TimeSheet.findTimeSheetEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM TimeSheet o", TimeSheet.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    public static List<Password> Password.findPasswordEntries(int firstResult, int maxResults) {
+        return entityManager().createQuery("SELECT o FROM Password o", Password.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
-    public static List<TimeSheet> TimeSheet.findTimeSheetEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
-        String jpaQuery = "SELECT o FROM TimeSheet o";
+    public static List<Password> Password.findPasswordEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder) {
+        String jpaQuery = "SELECT o FROM Password o";
         if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
             jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
             if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
                 jpaQuery = jpaQuery + " " + sortOrder;
             }
         }
-        return entityManager().createQuery(jpaQuery, TimeSheet.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+        return entityManager().createQuery(jpaQuery, Password.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
     @Transactional
-    public void TimeSheet.persist() {
+    public void Password.persist() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.persist(this);
     }
     
     @Transactional
-    public void TimeSheet.remove() {
+    public void Password.remove() {
         if (this.entityManager == null) this.entityManager = entityManager();
         if (this.entityManager.contains(this)) {
             this.entityManager.remove(this);
         } else {
-            TimeSheet attached = TimeSheet.findTimeSheet(this.id);
+            Password attached = Password.findPassword(this.id);
             this.entityManager.remove(attached);
         }
     }
     
     @Transactional
-    public void TimeSheet.flush() {
+    public void Password.flush() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.flush();
     }
     
     @Transactional
-    public void TimeSheet.clear() {
+    public void Password.clear() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.clear();
     }
     
     @Transactional
-    public TimeSheet TimeSheet.merge() {
+    public Password Password.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
-        TimeSheet merged = this.entityManager.merge(this);
+        Password merged = this.entityManager.merge(this);
         this.entityManager.flush();
         return merged;
     }

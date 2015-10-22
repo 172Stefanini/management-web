@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_com_stefanini_bob_management_domain_Password" modelAttribute="password" path="/passwords" versionField="Version" z="v0Yzr/ZbA7vpGoXJR4YYEtTHbzw=">
+        <field:input field="oldPassword" id="c_com_stefanini_bob_management_domain_Password_oldPassword" z="sEObV/4tWuTdimQ6GomZd1CP15c="/>
+        <field:input field="keyPass" id="c_com_stefanini_bob_management_domain_Password_keyPass" required="true" z="z5uIGpETA5RxvULSArzElM+FqNc="/>
+        <field:select field="person" id="c_com_stefanini_bob_management_domain_Password_person" itemValue="id" items="${people}" path="/people" render="false" z="user-managed"/>
+    </form:update>
+</div>

@@ -4,6 +4,7 @@
 package com.stefanini.bob.management.web;
 
 import com.stefanini.bob.management.domain.Category;
+import com.stefanini.bob.management.domain.Password;
 import com.stefanini.bob.management.domain.Person;
 import com.stefanini.bob.management.domain.PersonProjectRelationship;
 import com.stefanini.bob.management.domain.PersonWorkGroupRelationship;
@@ -12,6 +13,7 @@ import com.stefanini.bob.management.domain.Task;
 import com.stefanini.bob.management.domain.TimeSheet;
 import com.stefanini.bob.management.domain.WorkGroup;
 import com.stefanini.bob.management.services.CategoryService;
+import com.stefanini.bob.management.services.PasswordService;
 import com.stefanini.bob.management.services.PersonProjectRelationshipService;
 import com.stefanini.bob.management.services.PersonService;
 import com.stefanini.bob.management.services.PersonWorkGroupRelationshipService;
@@ -31,6 +33,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     
     @Autowired
     CategoryService ApplicationConversionServiceFactoryBean.categoryService;
+    
+    @Autowired
+    PasswordService ApplicationConversionServiceFactoryBean.passwordService;
     
     @Autowired
     PersonService ApplicationConversionServiceFactoryBean.personService;
@@ -73,6 +78,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, com.stefanini.bob.management.domain.Category>() {
             public com.stefanini.bob.management.domain.Category convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), Category.class);
+            }
+        };
+    }
+    
+    public Converter<Password, String> ApplicationConversionServiceFactoryBean.getPasswordToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<com.stefanini.bob.management.domain.Password, java.lang.String>() {
+            public String convert(Password password) {
+                return new StringBuilder().append(password.getKeyPass()).append(' ').append(password.getOldPassword()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, Password> ApplicationConversionServiceFactoryBean.getIdToPasswordConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, com.stefanini.bob.management.domain.Password>() {
+            public com.stefanini.bob.management.domain.Password convert(java.lang.Long id) {
+                return passwordService.findPassword(id);
+            }
+        };
+    }
+    
+    public Converter<String, Password> ApplicationConversionServiceFactoryBean.getStringToPasswordConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, com.stefanini.bob.management.domain.Password>() {
+            public com.stefanini.bob.management.domain.Password convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), Password.class);
             }
         };
     }
@@ -249,6 +278,9 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getCategoryToStringConverter());
         registry.addConverter(getIdToCategoryConverter());
         registry.addConverter(getStringToCategoryConverter());
+        registry.addConverter(getPasswordToStringConverter());
+        registry.addConverter(getIdToPasswordConverter());
+        registry.addConverter(getStringToPasswordConverter());
         registry.addConverter(getPersonToStringConverter());
         registry.addConverter(getIdToPersonConverter());
         registry.addConverter(getStringToPersonConverter());

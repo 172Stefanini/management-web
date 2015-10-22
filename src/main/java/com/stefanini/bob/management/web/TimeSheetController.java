@@ -92,8 +92,7 @@ public class TimeSheetController {
         uiModel.addAttribute("workgroups", listWorkGroupToShow);
         
         Integer daysPast = new Integer(1);
-        Date yesterday = DateTimeUtils.add(new Date(), Calendar.DAY_OF_MONTH, -1);
-        if(DateTimeUtils.isMonday(yesterday));
+        if(DateTimeUtils.isMonday(new Date()));
         	daysPast = 3;
         
         uiModel.addAttribute("daysPast", daysPast);
