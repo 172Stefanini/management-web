@@ -94,6 +94,9 @@ public class TimeSheetController {
         Integer daysPast = new Integer(1);
         if(DateTimeUtils.isMonday(new Date()));
         	daysPast = 3;
+        	
+        if(this.securityContextUtils.getGrants().contains("ROLE_UX"))
+        	daysPast = 7;
         
         uiModel.addAttribute("daysPast", daysPast);
     }

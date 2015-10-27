@@ -42,11 +42,11 @@
 				<user name="bbatistão" password="a61ebdb04f7eef4f1329f1dfd96ded00d6d86a5e4175d1e6027b03bdab208158" authorities="ROLE_USER" />
 				<user name="bcasillo" password="63169b3ca664223773700f0edd07cdf872cb74e6f1a5d979b6c99138297e2885" authorities="ROLE_MANAGER" />
 				<user name="cfrois" password="9d1a2292778a7a60afd2f3296d6ea723a21d39ec5b715d05288068bfd84aa6b6" authorities="ROLE_USER" />
-				<user name="cleandro" password="4898654b9a5df7dd6ec493d0f51a3d58886df28c4025efc0a37ee4b731ad5f0a" authorities="ROLE_USER" />
+				<user name="cleandro" password="4898654b9a5df7dd6ec493d0f51a3d58886df28c4025efc0a37ee4b731ad5f0a" authorities="ROLE_USER, ROLE_UX" />
 				<user name="csobrinho" password="f156e20555ce1a1233619a5044d94d7e5e520444db264e7bfffbcc3487fc7a29" authorities="ROLE_USER" />
 				<user name="csanches" password="6a3228ad8bb2cff7c2791bbd0c006827c02974db0f67ef1ba4293a93e0be289d" authorities="ROLE_USER" />
 				<user name="coliveira" password="2e905e370853d8de6cccd23f7c9adcc7ea620df0e5b9f8af2c1d116d5ad73d92" authorities="ROLE_USER" />
-				<user name="ccastro" password="173448f2f2e6fdfd873b399d2aa734b970b3b2a530d583c025881a73b35fb98b" authorities="ROLE_USER" />
+				<user name="ccastro" password="173448f2f2e6fdfd873b399d2aa734b970b3b2a530d583c025881a73b35fb98b" authorities="ROLE_USER, ROLE_UX" />
 				<user name="dcezar" password="d43de3be7a7a4c7203af1aac35c727076b2651722512c164f1384d14c52a9142" authorities="ROLE_USER" />
 				<user name="dortiz" password="b618dd8edfc68305c42ed381623a80858a0701d2f495fa27f4e013fa7b860ac8" authorities="ROLE_USER" />
 				<user name="erossi" password="173448f2f2e6fdfd873b399d2aa734b970b3b2a530d583c025881a73b35fb98b" authorities="ROLE_USER" />
@@ -83,7 +83,7 @@
 				<user name="rnero" password="ec3a974701b93a1193a4f6b3d74798753254ac218af84ba3013ed16c77f98e1c" authorities="ROLE_USER" />
 				<user name="rmoises" password="138208c2e32fb72a539b0b87cbb38aee7b190b21e67ea42209b3549d6a8bfdc5" authorities="ROLE_MANAGER" />
 				<user name="rqueiroz" password="f93b09ed137fcc62c4e953730d74f9bc63a8052fafb7620e3e6ec31152e62a68" authorities="ROLE_USER" />
-				<user name="rcastro" password="ed39387ef1ea5290b30e175e9ee8045ac7df5b4e039a460bca9836cb8db2dd22" authorities="ROLE_USER" />
+				<user name="rcastro" password="ed39387ef1ea5290b30e175e9ee8045ac7df5b4e039a460bca9836cb8db2dd22" authorities="ROLE_USER, ROLE_UX" />
 				<user name="rkisahleitner" password="5f026deaeb0265d5c613d354d9ab7c9e96e90a438eb91f47111606c3a3bb9114" authorities="ROLE_USER" />
 				<user name="ssantos" password="839f730c3a7913e2a8860ed7bf5fb45a582b74bccdc1366b69748859b9c5e8e2" authorities="ROLE_USER" />
 				<user name="ssilva" password="32d61490e8c1a7e56d468abcd4a153c22e1786f538beb90e18195ddfd14423fe" authorities="ROLE_USER" />
