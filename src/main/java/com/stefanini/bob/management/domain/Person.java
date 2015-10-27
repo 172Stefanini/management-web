@@ -1,4 +1,5 @@
 package com.stefanini.bob.management.domain;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -8,10 +9,11 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
+
+import com.stefanini.bob.management.utils.DateTimeUtils;
 
 @RooJavaBean
 @RooToString
@@ -55,7 +57,7 @@ public class Person {
 			jpaQuery += " inner join person_work_group_relationship pwr on pwr.person = p.id";
 		}
 
-		jpaQuery += " where not exists (select * from time_sheet t where t.person = p.id and (t.occurrence_date = :now or t.occurrence_date = :yesterday))";
+		jpaQuery += " where not exists (select * from time_sheet t where t.person = p.id and (t.occurrence_date = :yesterday))";
 
 		if(workGroup!=null){
 			jpaQuery += " and pwr.work_group = :wg";
@@ -71,8 +73,7 @@ public class Person {
 		}
 	    
         Query query = entityManager().createNativeQuery(jpaQuery, Person.class)
-        		.setParameter("now", new Date(), TemporalType.DATE)
-        		.setParameter("yesterday", DateUtils.addDays(new Date(), -1), TemporalType.DATE);
+        		.setParameter("yesterday", DateTimeUtils.add(new Date(), Calendar.DAY_OF_MONTH, DateTimeUtils.isMonday(new Date())?-3:-1), TemporalType.DATE);
 
         if(workGroup!=null){
         	query.setParameter("wg", workGroup);

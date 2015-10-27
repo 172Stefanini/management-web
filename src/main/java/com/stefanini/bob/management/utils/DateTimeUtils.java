@@ -8,18 +8,18 @@ import org.joda.time.DateTime;
 import org.joda.time.Days;
 
 /**
- * Classe utilit�ria para opera��es de data e hora
+ * Classe utilitária para operações de data e hora
  * @author fpsouza
  */
 public class DateTimeUtils {
 
 	
 	/**
-	 * M�todo para acrescentar ou decrescer unidades de uma determinada data retornando a data resultante do c�lculo
-	 * @param date - data alvo da opera��o
+	 * Método para acrescentar ou decrescer unidades de uma determinada data retornando a data resultante do cálculo
+	 * @param date - data alvo da operação
 	 * @param field - inteiro que representa o campo a ser acrescido ou descrescido (Usar o Calendar.DAY_OF_MONTH, por exemplo)
 	 * @param amount - quantidade a ser acrescida (passar valor +) ou descrescida (passar valor -)
-	 * @return Data acrescida/descrescida da quantidade e unidades passadas como param�tro
+	 * @return Data acrescida/descrescida da quantidade e unidades passadas como paramêtro
 	 */
 	public static Date add(Date date, int field, int amount){
 		Calendar calendar = new GregorianCalendar();
@@ -34,6 +34,16 @@ public class DateTimeUtils {
         return calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY;
 	}
 	
+	public static boolean isWorkDay(Date date){
+		if(isWeekend(date)) return true;
+		return true;
+	}
+	
+	public static boolean isWeekend(Date date){
+		Calendar calendar = new GregorianCalendar();
+        calendar.setTime(date);
+        return calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY;
+	}
 	
 	public static int getDifferenceBetweenTwoDates(Date date1, Date date2){
 		Calendar calendar1 = new GregorianCalendar();

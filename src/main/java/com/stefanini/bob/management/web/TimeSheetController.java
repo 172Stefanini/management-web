@@ -217,7 +217,7 @@ public class TimeSheetController {
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
             listTimesheet = TimeSheet.findTimeSheetEntries(firstResult, sizeNo, sortFieldName, sortOrder, listPeopleToFilter, filterDataFrom, filterDataTo, of);
             uiModel.addAttribute("timesheets", listTimesheet);
-            float nrOfPages = (float) timeSheetService.countAllTimeSheets() / sizeNo;
+            float nrOfPages = (float) TimeSheet.countAllTimeSheets(sortFieldName, sortOrder, listPeopleToFilter, filterDataFrom, filterDataTo, of) / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
         	listTimesheet = TimeSheet.findAllTimeSheets(sortFieldName, sortOrder, listPeopleToFilter, filterDataFrom, filterDataTo, of);

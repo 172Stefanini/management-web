@@ -90,29 +90,28 @@ public class TimeSheet {
 
     public static List<TimeSheet> findTimeSheetEntries(int firstResult, int maxResults, String sortFieldName, String sortOrder, List<Person> persons, Date from, Date to, Person of) {
         if (persons.isEmpty()) return new LinkedList<TimeSheet>();
-        String jpaQuery = "SELECT o FROM TimeSheet o WHERE o.person in (:listPersons)";
-        if (from != null && to != null) jpaQuery += " AND o.occurrenceDate BETWEEN :from AND :to";
-        if (of != null) jpaQuery += " AND o.person = :of";
-        if (fieldNames4OrderClauseFilter.contains(sortFieldName)) {
-            jpaQuery = jpaQuery + " ORDER BY " + sortFieldName;
-            if ("ASC".equalsIgnoreCase(sortOrder) || "DESC".equalsIgnoreCase(sortOrder)) {
-                jpaQuery = jpaQuery + " " + sortOrder;
-            }
-        }else{
-        	jpaQuery = jpaQuery + " ORDER BY " + "o.occurrenceDate DESC";
-        }
-        TypedQuery<TimeSheet> query = entityManager().createQuery(jpaQuery, TimeSheet.class);
-        query.setParameter("listPersons", persons);
-        if (from != null && to != null) {
-            query.setParameter("from", from, TemporalType.DATE);
-            query.setParameter("to", to, TemporalType.DATE);
-        }
-        if (of != null) query.setParameter("of", of);
+        TypedQuery<TimeSheet> query = buildQuery(sortFieldName, sortOrder,
+				persons, from, to, of);
         return query.setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
 
     public static List<TimeSheet> findAllTimeSheets(String sortFieldName, String sortOrder, List<Person> persons, Date from, Date to, Person of) {
-        if (persons.isEmpty()) return new LinkedList<TimeSheet>();
+    	if (persons.isEmpty()) return new LinkedList<TimeSheet>();
+        TypedQuery<TimeSheet> query = buildQuery(sortFieldName, sortOrder,
+				persons, from, to, of);
+        return query.getResultList();
+    }
+    
+    public static Integer countAllTimeSheets(String sortFieldName, String sortOrder, List<Person> persons, Date from, Date to, Person of) {
+    	if (persons.isEmpty()) return 0;
+        TypedQuery<TimeSheet> query = buildQuery(sortFieldName, sortOrder,
+				persons, from, to, of);
+        return query.getResultList().size();
+    }
+
+	private static TypedQuery<TimeSheet> buildQuery(String sortFieldName,
+			String sortOrder, List<Person> persons, Date from, Date to,
+			Person of) {
         String jpaQuery = "SELECT o FROM TimeSheet o  WHERE o.person in (:listPersons)";
         if (from != null && to != null) jpaQuery += " AND o.occurrenceDate BETWEEN :from AND :to";
         if (of != null) jpaQuery += " AND o.person = :of";
@@ -131,8 +130,8 @@ public class TimeSheet {
             query.setParameter("to", to, TemporalType.DATE);
         }
         if (of != null) query.setParameter("of", of);
-        return query.getResultList();
-    }
+		return query;
+	}
 
     public Boolean getDeleteAllowed() {
         return deleteAllowed;
