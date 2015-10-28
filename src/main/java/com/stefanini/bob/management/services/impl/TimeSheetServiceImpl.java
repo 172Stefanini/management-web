@@ -50,18 +50,24 @@ public class TimeSheetServiceImpl implements TimeSheetService {
 			Set<Integer> setOfDecimals = new HashSet<Integer>();
 			
 			for (TimeSheet timeSheet : listTimeSheetByPerson) {
-				BigDecimal roudedValue = timeSheet.getWorkHours().setScale(0, RoundingMode.UP);
-				BigDecimal differenceOfValueVersusRounded = timeSheet.getWorkHours().subtract(roudedValue, new MathContext(1, RoundingMode.UP));
-				//coloca o sinal como positivo (menos com menos dá mais)
-				differenceOfValueVersusRounded = differenceOfValueVersusRounded.negate();
-				
-				if(!differenceOfValueVersusRounded.equals(new BigDecimal(0,new MathContext(1)).setScale(1))){
-					if(setOfDecimals.contains(new BigDecimal(1, new MathContext(1)).subtract(differenceOfValueVersusRounded).multiply(new BigDecimal(10)).intValue())){
-						timeSheet.setWorkHours(timeSheet.getWorkHours().subtract(new BigDecimal(1, new MathContext(1)).subtract(differenceOfValueVersusRounded)));
-						setOfDecimals.remove(new BigDecimal(1, new MathContext(1)).subtract(differenceOfValueVersusRounded).multiply(new BigDecimal(10)).intValue());
-					}else{
-						timeSheet.setWorkHours(roudedValue);
-						setOfDecimals.add(differenceOfValueVersusRounded.multiply(new BigDecimal(10)).intValue());
+				if(timeSheet.getOvertime()){
+					timeSheet.setWorkHours(timeSheet.getWorkHours().setScale(0, RoundingMode.UP));
+				}
+				else
+				{
+					BigDecimal roudedValue = timeSheet.getWorkHours().setScale(0, RoundingMode.UP);
+					BigDecimal differenceOfValueVersusRounded = timeSheet.getWorkHours().subtract(roudedValue, new MathContext(1, RoundingMode.UP));
+					//coloca o sinal como positivo (menos com menos dá mais)
+					differenceOfValueVersusRounded = differenceOfValueVersusRounded.negate();
+					
+					if(!differenceOfValueVersusRounded.equals(new BigDecimal(0,new MathContext(1)).setScale(1))){
+						if(setOfDecimals.contains(new BigDecimal(1, new MathContext(1)).subtract(differenceOfValueVersusRounded).multiply(new BigDecimal(10)).intValue())){
+							timeSheet.setWorkHours(timeSheet.getWorkHours().subtract(new BigDecimal(1, new MathContext(1)).subtract(differenceOfValueVersusRounded)));
+							setOfDecimals.remove(new BigDecimal(1, new MathContext(1)).subtract(differenceOfValueVersusRounded).multiply(new BigDecimal(10)).intValue());
+						}else{
+							timeSheet.setWorkHours(roudedValue);
+							setOfDecimals.add(differenceOfValueVersusRounded.multiply(new BigDecimal(10)).intValue());
+						}
 					}
 				}
 				resultList.add(timeSheet);
