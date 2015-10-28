@@ -244,6 +244,14 @@ public class TimeSheetController {
 
     }
 	
+	@RequestMapping(params = "roundExcel")
+    public ModelAndView roundExcelExport(Model uiModel) {
+		List<Person> listPeopleToFilter = getListOfPeopleByPermission();
+		List<TimeSheet> listTimesheet = timeSheetService.findAllTimesheetWithRound(null, null, listPeopleToFilter, this.filterDataFrom, this.filterDataTo, this.of);
+		return new ModelAndView("TimesheetDailyExcelView", "timesheetList", listTimesheet);
+
+    }
+	
 	private List<Person> getListOfPeopleByPermission(){
 		List<Person> listPeopleToFilter = new ArrayList<Person>();
 		securityContextUtils = new SecurityContextUtils();

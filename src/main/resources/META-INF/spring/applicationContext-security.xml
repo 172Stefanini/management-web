@@ -32,7 +32,7 @@
 				<user name="aoliveira" password="5f9cffd82bcb896d76e98b8fe4f2c15820fb2eb31388cd315905738b34f9e192" authorities="ROLE_USER" />
 				<user name="abeghini" password="cadca59c49ec1fa4e9f329464a46d3b135f47c43aca881da3cf7fffc73a91914" authorities="ROLE_USER" />
 				<user name="asantos" password="cadca59c49ec1fa4e9f329464a46d3b135f47c43aca881da3cf7fffc73a91914" authorities="ROLE_USER" />
-				<user name="aleite" password="fb383bd2ff039acb1ef5b28bd01980fee3aaf7a615ea728a4c766e28dc80cadd" authorities="ROLE_ADMIN" />
+				<user name="aleite" password="fb383bd2ff039acb1ef5b28bd01980fee3aaf7a615ea728a4c766e28dc80cadd" authorities="ROLE_ADMIN, ROLE_TIMESHEET_CIELO" />
 				<user name="asoares" password="4898654b9a5df7dd6ec493d0f51a3d58886df28c4025efc0a37ee4b731ad5f0a" authorities="ROLE_USER" />
 				<user name="asilva" password="b3be1e839bcd41515fb7bb72b765900e7c84713a2c6a241c497a0c8640824f0e" authorities="ROLE_USER" />
 				<user name="avalentim" password="1d1bbe7625080515268221c5d9dd9cb46debfdb3afc0a1df235529704dcc2849" authorities="ROLE_USER" />
